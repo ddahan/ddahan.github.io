@@ -1,7 +1,7 @@
 .build
 .idea
 .temp
-_draft
+_drafts
 _site
 node_modules
 
