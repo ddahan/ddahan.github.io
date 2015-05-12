@@ -43,9 +43,11 @@ layout: default
             {% assign tags_content = '' %}
         {% endif %}
 
-        <!-- DISQUS integration -->
-        {% include disqus.html %}
-
         <p id="post-meta">Posted {{ category_content }}{{ tags_content }}</p>
+
+        <!-- DISQUS integration -->
+        {% if page.comments %}
+            {% include disqus.html %}
+        {% endif %}
     </div>
 </article>
