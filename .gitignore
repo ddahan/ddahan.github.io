@@ -1,0 +1,10 @@
+.build
+.idea
+.temp
+_draft
+_site
+node_modules
+
+.DS_Store
+npm-debug.log
+TODO.md
