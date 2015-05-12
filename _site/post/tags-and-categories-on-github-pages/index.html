@@ -1,0 +1,258 @@
+<!DOCTYPE html><!-- 01101101 01101001 01101110 01100100 01100100 01110101 01110011 01110100 -->
+<html lang="en">
+    <head>
+        <title>david-dahan.com &ndash; How To Use Tags And Categories On GitHub Pages Without Plugins</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="author" content="David Dahan">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" href="/res/favicon-152.png">
+        <link rel="stylesheet" type="text/css" href="/res/minddust.min.css">
+        <script src="/res/common.min.js"></script>
+        <link rel="alternate" type="application/rss+xml" title="home" href="/feed.xml">
+    </head>
+    <body>
+        <div id="site">
+            <div class="container">
+                <div id="header">
+                    <!--[if lt IE 8]>
+                        <div class="alert alert-danger">
+                            <p><b>You are using an outdated browser!</b></p>
+                            <p>This can lead to some serious problems and is generally unsave!</p>
+                            <p>Please use new version of <a href='http://www.mozilla.org/firefox'>Firefox</a>, <a href='http://www.google.com/chrome'>Chrome</a> or <a href='http://www.apple.com/safari'>Safari</a>.</p>
+                        </div>
+                    <![endif]-->
+                    <a href="/" class="label label-darkblue">home</a>
+                    <a href="/blog/" class="label label-darkblue" data-toggle="tooltip" title="Blog Articles"><i class="fa fa-bars"></i></a>
+                    <a href="/projects/" class="label label-darkblue" data-toggle="tooltip" title="Personal Projects"><i class="fa fa-rocket"></i></a>
+                    <a href="/feed.xml" class="label label-darkblue" data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a>
+                    <a href="http://fr.linkedin.com/in/daviddahanepita/" class="label label-darkblue" data-toggle="tooltip" title="Linked In"><i class="fa fa-linkedin"></i></a>
+                    <a href="http://stackoverflow.com/users/2255491/" class="label label-darkblue" data-toggle="tooltip" title="Stack Overflow"><i class="fa fa-stack-overflow"></i></a>
+                </div>
+                <div id="content">
+                    
+
+<article>
+    <header id="post-header">
+        <h1 id="post-title">How To Use Tags And Categories On GitHub Pages Without Plugins</h1>
+        <h4 id="post-subtitle"><time datetime="2014-08-03T00:00:00+02:00">Aug. 03, 2014</time></h4>
+    </header>
+
+    <div id="post-content">
+        <p><a href="http://pages.github.com/">GitHub Pages</a> service is just awesome!</p>
+
+<p>And with the jekyll integration it even get’s more awesome! :D</p>
+
+<p>But there are some limitations of this big automated system:</p>
+
+<ul>
+<li>no own plugins</li>
+<li><a href="https://pages.github.com/versions/">limited available plugins</a></li>
+</ul>
+
+<p>As you may know:</p>
+
+<ul>
+<li>no tag / category plugins are (currently) available.</li>
+</ul>
+
+<p>Sad.. But that was something I really wanted to have!</p>
+
+<p>So I built my own Data-Template-NoPlugin-System and it works.</p>
+
+<p>You can see a live demo on this page.</p>
+
+<p>Here is a little guide how to implement it yourself:</p>
+
+<ol>
+<li><p>add some template logic on top of your <strong>post layout</strong></p>
+<div class="highlight"><pre><code class="language-html+django" data-lang="html+django"><span class="cp">{%</span> <span class="k">assign</span> <span class="nv">post</span> <span class="o">=</span> <span class="nv">page</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">post.tags.size</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">capture</span> <span class="nv">tags_content</span> <span class="cp">%}</span>Posted with <span class="cp">{%</span> <span class="k">if</span> <span class="nv">post.tags.size</span> <span class="o">==</span> <span class="m">1</span> <span class="cp">%}</span><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">&quot;fa fa-tag&quot;</span><span class="nt">&gt;&lt;/i&gt;</span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">&quot;fa fa-tags&quot;</span><span class="nt">&gt;&lt;/i&gt;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>: <span class="cp">{%</span> <span class="k">endcapture</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">post_tag</span> <span class="k">in</span> <span class="nv">post.tags</span> <span class="cp">%}</span>
+        <span class="cp">{%</span> <span class="k">for</span> <span class="nv">data_tag</span> <span class="k">in</span> <span class="nv">site.data.tags</span> <span class="cp">%}</span>
+            <span class="cp">{%</span> <span class="k">if</span> <span class="nv">data_tag.slug</span> <span class="o">==</span> <span class="nv">post_tag</span> <span class="cp">%}</span>
+                <span class="cp">{%</span> <span class="k">assign</span> <span class="nv">tag</span> <span class="o">=</span> <span class="nv">data_tag</span> <span class="cp">%}</span>
+            <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+        <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+        <span class="cp">{%</span> <span class="k">if</span> <span class="nv">tag</span> <span class="cp">%}</span>
+            <span class="cp">{%</span> <span class="k">capture</span> <span class="nv">tags_content_temp</span> <span class="cp">%}{{</span> <span class="nv">tags_content</span> <span class="cp">}}</span><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/blog/tag/</span><span class="cp">{{</span> <span class="nv">tag.slug</span> <span class="cp">}}</span><span class="s">/&quot;</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">tag.name</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;</span><span class="cp">{%</span> <span class="k">if</span> <span class="nb">forloop</span><span class="nv">.last</span> <span class="o">==</span> <span class="kp">false</span> <span class="cp">%}</span>, <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}{%</span> <span class="k">endcapture</span> <span class="cp">%}</span>
+            <span class="cp">{%</span> <span class="k">assign</span> <span class="nv">tags_content</span> <span class="o">=</span> <span class="nv">tags_content_temp</span> <span class="cp">%}</span>
+        <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">assign</span> <span class="nv">tags_content</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+</code></pre></div></li>
+<li><p>place the generated tag content wherever you like inside your <strong>post layout</strong></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;post-meta&quot;</span><span class="nt">&gt;</span>{{ tags_content }}<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></li>
+<li><p>create a <strong>blog_by_tag</strong> layout</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;h1&gt;</span>Articles by tag :{{ page.tag }}<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+    {% if site.tags[page.tag] %}
+        {% for post in site.tags[page.tag] %}
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ post.url }}/&quot;</span><span class="nt">&gt;</span>{{ post.title }}<span class="nt">&lt;/a&gt;</span>
+        {% endfor %}
+    {% else %}
+        <span class="nt">&lt;p&gt;</span>There are no posts for this tag.<span class="nt">&lt;/p&gt;</span>
+    {% endif %}
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></li>
+<li><p>annotate your <strong>post entry</strong> front-matter block as usual:</p>
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="nn">---</span>
+<span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">post</span>
+<span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">How To Use Tags And Categories On GitHub Pages Without Plugins</span>
+<span class="l-Scalar-Plain">category</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">programming</span>
+<span class="l-Scalar-Plain">tags</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">github</span><span class="p-Indicator">,</span> <span class="nv">github-pages</span><span class="p-Indicator">,</span> <span class="nv">jekyll</span><span class="p-Indicator">]</span>
+<span class="nn">---</span>
+</code></pre></div></li>
+<li><p>for every used tag you have to add an entry inside your <strong>_data/tags.yml</strong></p>
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">slug</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">github-pages</span>
+  <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">GitHub Pages</span>
+</code></pre></div></li>
+<li><p>for every used tag you have to add an empty template - e.g. <strong>blog/tag/github-pages.md</strong></p>
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="nn">---</span>
+<span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">blog_by_tag</span>
+<span class="l-Scalar-Plain">tag</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">github-pages</span>
+<span class="l-Scalar-Plain">permalink</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/blog/tag/github-pages/</span>
+<span class="nn">---</span>
+</code></pre></div></li>
+</ol>
+
+<p>For a more complex implementation and categories: <a href="https://github.com/minddust/minddust.github.io">check out my repository</a></p>
+
+<hr>
+
+<p><strong>Updates</strong> (Feb. 12, 2015):</p>
+
+<ul>
+<li>Added missing `` (thanks <a href="https://github.com/cdr255">Christopher Rodriguez</a>)</li>
+</ul>
+
+<p><strong>Updates</strong> (Apr. 4, 2015):</p>
+
+<ul>
+<li>Switch to absolute permalinks (which is forced by jekyll 2.0+)</li>
+</ul>
+
+
+        
+            
+                
+            
+                
+                    
+                
+            
+            
+                
+            
+        
+
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                
+                    
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                    
+                
+                    
+                
+                    
+                
+                
+                    
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                    
+                
+                    
+                
+                
+                    
+                    
+                
+            
+        
+
+        <p id="post-meta">Posted  in <span class="label" style="background-color:#1abc9c"><a href="/blog/category/programming/">Programming</a></span> with <i class="fa fa-tags"></i>: <a href="/blog/tag/github/">GitHub</a>, <a href="/blog/tag/github-pages/">GitHub Pages</a>, <a href="/blog/tag/jekyll/">Jekyll</a></p>
+    </div>
+</article>
+
+                </div>
+            </div>
+            <div id="push"></div>
+        </div>
+        <footer>
+            <div class="footer-table">
+                <div class="footer-cell">&ndash; david-dahan.com &ndash;</div>
+            </div>
+        </footer>
+        <script src="/res/minddust.min.js"></script>
+    </body>
+</html>

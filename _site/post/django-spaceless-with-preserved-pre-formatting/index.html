@@ -1,0 +1,274 @@
+<!DOCTYPE html><!-- 01101101 01101001 01101110 01100100 01100100 01110101 01110011 01110100 -->
+<html lang="en">
+    <head>
+        <title>david-dahan.com &ndash; Django Spaceless With Preserved Pre Formatting</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="author" content="David Dahan">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" href="/res/favicon-152.png">
+        <link rel="stylesheet" type="text/css" href="/res/minddust.min.css">
+        <script src="/res/common.min.js"></script>
+        <link rel="alternate" type="application/rss+xml" title="home" href="/feed.xml">
+    </head>
+    <body>
+        <div id="site">
+            <div class="container">
+                <div id="header">
+                    <!--[if lt IE 8]>
+                        <div class="alert alert-danger">
+                            <p><b>You are using an outdated browser!</b></p>
+                            <p>This can lead to some serious problems and is generally unsave!</p>
+                            <p>Please use new version of <a href='http://www.mozilla.org/firefox'>Firefox</a>, <a href='http://www.google.com/chrome'>Chrome</a> or <a href='http://www.apple.com/safari'>Safari</a>.</p>
+                        </div>
+                    <![endif]-->
+                    <a href="/" class="label label-darkblue">home</a>
+                    <a href="/blog/" class="label label-darkblue" data-toggle="tooltip" title="Blog Articles"><i class="fa fa-bars"></i></a>
+                    <a href="/projects/" class="label label-darkblue" data-toggle="tooltip" title="Personal Projects"><i class="fa fa-rocket"></i></a>
+                    <a href="/feed.xml" class="label label-darkblue" data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a>
+                    <a href="http://fr.linkedin.com/in/daviddahanepita/" class="label label-darkblue" data-toggle="tooltip" title="Linked In"><i class="fa fa-linkedin"></i></a>
+                    <a href="http://stackoverflow.com/users/2255491/" class="label label-darkblue" data-toggle="tooltip" title="Stack Overflow"><i class="fa fa-stack-overflow"></i></a>
+                </div>
+                <div id="content">
+                    
+
+<article>
+    <header id="post-header">
+        <h1 id="post-title">Django Spaceless With Preserved Pre Formatting</h1>
+        <h4 id="post-subtitle"><time datetime="2013-12-31T00:00:00+01:00">Dec. 31, 2013</time></h4>
+    </header>
+
+    <div id="post-content">
+        <p>I&#39;m using Django&#39;s <a href="https://docs.djangoproject.com/en/dev/ref/templates/builtins/#spaceless">spaceless</a> template-tag a lot, but after adding some code inside a <code>pre</code> tag I recognised that everything left is a squeezed string. I never came up with that problem before. The builtin spaceless tag is doing just fine. So after a little bit of searching I quickly found some resources about that topic:</p>
+
+<p><a href="https://code.djangoproject.com/ticket/15798">https://code.djangoproject.com/ticket/15798</a></p>
+
+<p><a href="http://www.mail-archive.com/django-developers@googlegroups.com/msg09235.html">http://www.mail-archive.com/django-developers@googlegroups.com/msg09235.html</a></p>
+
+<p>Summary:</p>
+
+<ul>
+<li>not possible with builtin methods</li>
+<li>not coming with future versions</li>
+</ul>
+
+<p>It was my fault to expect something different from a tag which does exactly what it should.</p>
+
+<p>But this doesn&#39;t matter - let&#39;s build a new template tag that does the trick! :)</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="sd">&quot;&quot;&quot;Copyright (c) 2013-2014 Stephan Groß, under MIT license.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">template</span>
+<span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">six</span>
+<span class="kn">from</span> <span class="nn">django.utils.encoding</span> <span class="kn">import</span> <span class="n">force_text</span>
+<span class="kn">from</span> <span class="nn">django.utils.functional</span> <span class="kn">import</span> <span class="n">allow_lazy</span>
+
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">strip_spaces_between_tags_except_pre</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">replacement</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">matches</span><span class="p">,</span> <span class="n">match</span><span class="p">):</span>
+        <span class="n">matches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c"># save the whole match without leading &quot;&lt;&quot; and trailing &quot;&gt;&quot;</span>
+        <span class="n">count</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="s">&#39;&lt;}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c"># add &quot;&lt;&quot; and &quot;&gt;&quot; to preserve space stripping</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r&#39;&lt;pre(\s.*)?&gt;(.*?)&lt;/pre&gt;&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">match</span><span class="p">:</span> <span class="n">replacement</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">matches</span><span class="p">,</span> <span class="n">match</span><span class="p">),</span> <span class="n">force_text</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">S</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r&#39;&gt;\s+&lt;&#39;</span><span class="p">,</span> <span class="s">&#39;&gt;&lt;&#39;</span><span class="p">,</span> <span class="n">force_text</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">matches</span><span class="p">)</span>
+<span class="n">strip_spaces_between_tags_except_pre</span> <span class="o">=</span> <span class="n">allow_lazy</span><span class="p">(</span><span class="n">strip_spaces_between_tags_except_pre</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">SpacelessExceptPreNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodelist</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nodelist</span> <span class="o">=</span> <span class="n">nodelist</span>
+
+    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">strip_spaces_between_tags_except_pre</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodelist</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+
+<span class="nd">@register.tag</span>
+<span class="k">def</span> <span class="nf">spaceless_except_pre</span><span class="p">(</span><span class="n">parser</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove whitespace between HTML tags, including tab and newline characters except content between &lt;pre&gt;&quot;&quot;&quot;</span>
+    <span class="n">nodelist</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">((</span><span class="s">&#39;endspaceless_except_pre&#39;</span><span class="p">,))</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">delete_first_token</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">SpacelessExceptPreNode</span><span class="p">(</span><span class="n">nodelist</span><span class="p">)</span>
+</code></pre></div>
+<p>also available as <a href="https://gist.github.com/minddust/8196664">Gist</a>.</p>
+
+<p>Just put this snippet in a new file (like <code>spaceless_except_pre.py</code>) inside your <code>templatetags</code> folder.</p>
+
+<p>Now you can load and apply this tag inside your template like:</p>
+
+<div class="highlight"><pre><code class="language-html-django" data-lang="html+django"><span class="cp">{%</span> <span class="k">load</span> <span class="nv">spaceless_except_pre</span> <span class="cp">%}{%</span> <span class="k">spaceless_except_pre</span> <span class="cp">%}</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;codehilite&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;pre&gt;</span>
+            <span class="nt">&lt;code&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;k&quot;</span><span class="nt">&gt;</span>def<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;nf&quot;</span><span class="nt">&gt;</span>hello<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;p&quot;</span><span class="nt">&gt;</span>():<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;k&quot;</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;s&quot;</span><span class="nt">&gt;</span><span class="ni">&amp;quot;</span>world<span class="ni">&amp;quot;</span><span class="nt">&lt;/span&gt;</span>
+            <span class="nt">&lt;/code&gt;</span>
+        <span class="nt">&lt;/pre&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+<span class="cp">{%</span> <span class="k">endspaceless_except_pre</span> <span class="cp">%}</span></code></pre></div>
+
+<p>which will result in:</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;html&gt;&lt;body&gt;&lt;div</span> <span class="na">class=</span><span class="s">&quot;codehilite&quot;</span><span class="nt">&gt;&lt;pre&gt;&lt;code&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;k&quot;</span><span class="nt">&gt;</span>def<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;nf&quot;</span><span class="nt">&gt;</span>hello<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;p&quot;</span><span class="nt">&gt;</span>():<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;k&quot;</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;s&quot;</span><span class="nt">&gt;</span><span class="ni">&amp;quot;</span>world<span class="ni">&amp;quot;</span><span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</span>
+</code></pre></div>
+<p>and frontend:</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html">def hello():
+    print &quot;world&quot;
+</code></pre></div>
+<p>You could also take a look at the source of this post for a bigger example.</p>
+
+<p>For those of you who like digging deeper, I simply matched all <code>&lt;pre&gt;..&lt;/pre&gt;</code> blocks and call a <code>replacement</code> method. Inside that method I:</p>
+
+<ul>
+<li>append the original content to a list.</li>
+<li>increment a counter</li>
+<li>replace the matched pre block content with a placeholder</li>
+</ul>
+
+<p>The trick is that the replaced content with the individual id fits the python string <a href="http://docs.python.org/2/library/stdtypes.html#str.format">format</a> method syntax. So after stripping out all whitespaces between the tags I call format and pass my filled matched list.</p>
+
+<p>And that&#39;s it. Thank you for reading.</p>
+
+<hr>
+
+<p><strong>Updates</strong> (Jan. 1, 2014):</p>
+
+<ul>
+<li>Improved script to save complete original expression and ignore cases.</li>
+<li>Fix example to use highlighted code (which causes the troubles)</li>
+</ul>
+
+<p>P.S.: Plain text is doing just fine with the default spaceless tag cause it isn&#39;t affected by the strip regex.</p>
+
+
+        
+            
+                
+            
+                
+                    
+                
+            
+            
+                
+            
+        
+
+        
+            
+            
+                
+                    
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                
+                    
+                    
+                
+            
+                
+                    
+                
+                    
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                
+                    
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                
+                    
+                    
+                
+            
+        
+
+        <p id="post-meta">Posted  in <span class="label" style="background-color:#1abc9c"><a href="/blog/category/programming/">Programming</a></span> with <i class="fa fa-tags"></i>: <a href="/blog/tag/django/">Django</a>, <a href="/blog/tag/django-template-tags/">Django Template Tags</a>, <a href="/blog/tag/python/">Python</a></p>
+    </div>
+</article>
+
+                </div>
+            </div>
+            <div id="push"></div>
+        </div>
+        <footer>
+            <div class="footer-table">
+                <div class="footer-cell">&ndash; david-dahan.com &ndash;</div>
+            </div>
+        </footer>
+        <script src="/res/minddust.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html><!-- 01101101 01101001 01101110 01100100 01100100 01110101 01110011 01110100 -->
+<html lang="en">
+    <head>
+        <title>david-dahan.com &ndash; jQuery-pjaxr</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="author" content="David Dahan">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" href="/res/favicon-152.png">
+        <link rel="stylesheet" type="text/css" href="/res/minddust.min.css">
+        <script src="/res/common.min.js"></script>
+        <link rel="alternate" type="application/rss+xml" title="home" href="/feed.xml">
+    </head>
+    <body>
+        <div id="site">
+            <div class="container">
+                <div id="header">
+                    <!--[if lt IE 8]>
+                        <div class="alert alert-danger">
+                            <p><b>You are using an outdated browser!</b></p>
+                            <p>This can lead to some serious problems and is generally unsave!</p>
+                            <p>Please use new version of <a href='http://www.mozilla.org/firefox'>Firefox</a>, <a href='http://www.google.com/chrome'>Chrome</a> or <a href='http://www.apple.com/safari'>Safari</a>.</p>
+                        </div>
+                    <![endif]-->
+                    <a href="/" class="label label-darkblue">home</a>
+                    <a href="/blog/" class="label label-darkblue" data-toggle="tooltip" title="Blog Articles"><i class="fa fa-bars"></i></a>
+                    <a href="/projects/" class="label label-darkblue" data-toggle="tooltip" title="Personal Projects"><i class="fa fa-rocket"></i></a>
+                    <a href="/feed.xml" class="label label-darkblue" data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a>
+                    <a href="http://fr.linkedin.com/in/daviddahanepita/" class="label label-darkblue" data-toggle="tooltip" title="Linked In"><i class="fa fa-linkedin"></i></a>
+                    <a href="http://stackoverflow.com/users/2255491/" class="label label-darkblue" data-toggle="tooltip" title="Stack Overflow"><i class="fa fa-stack-overflow"></i></a>
+                </div>
+                <div id="content">
+                    
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+
+
+
+    <header id="post-header">
+        <h1 id="post-title">jQuery-pjaxr</h1>
+        <h4 id="post-subtitle">Pushstate aJAX eXtended Replacements</h4>
+    </header>
+
+    <div id="post-content">
+        <ul class="nav nav-pills">
+            
+                <li class="active"><a href="#">Overview</a></li>
+            
+            
+            
+            
+                
+                    <li><a href="/project/jquery-pjaxr/changelog/">Changelog</a></li>
+                
+            
+            
+                <li><a href="">GitHub</a></li>
+            
+        </ul>
+        <p><a href="http://travis-ci.org/minddust/jquery-pjaxr"><img src="https://secure.travis-ci.org/minddust/jquery-pjaxr.png" alt="Build Status"></a></p>
+
+<p>jquery-pjaxr is <a href="http://jquery.com/">jQuery</a> plugin that uses ajax and pushState to deliver a fast browsing experience.</p>
+
+<p>It is able to replace <strong>multiple containers</strong> and different <strong>head tags</strong> with full back-forward functionality.</p>
+
+<p>For <a href="http://caniuse.com/#search=pushstate">browsers that don&#39;t support pushState</a> pjaxr fully degrades.</p>
+
+<h2>Why another pjax library?</h2>
+
+<p>Shortly after starting with pjax a ran into some limitations like:</p>
+
+<ul>
+<li>how to add additional head elements?</li>
+<li>how to update multiple containers?</li>
+</ul>
+
+<p>I started writing a workaround which became an own library and here we are :).</p>
+
+<p>I hope pjaxr will help people who are running into the same problems like I did.</p>
+
+<h2>Note</h2>
+
+<p>There is already an awesome plugin called <a href="https://github.com/defunkt/jquery-pjax">jquery-pjax</a> on which this project is based.  For not breaking existing frontends but to support the same port to the server this library is named <strong>pjaxr</strong> and accepts the same header <strong>X-PJAX</strong>.</p>
+
+<blockquote>
+<p>There are still many testcases missing but the most signicant are setup. PR&#39;s are welcome.</p>
+</blockquote>
+
+<h2>Installation</h2>
+
+<ul>
+<li>Download the latest release: <a href="https://github.com/minddust/jquery-pjaxr/archive/v1.1.0.zip">v1.1.0</a></li>
+<li>Clone the repository: <code>git clone git@github.com:minddust/jquery-pjaxr.git</code>.</li>
+<li>Curl the library: <code>curl -O https://raw.github.com/minddust/jquery-pjaxr/master/jquery.pjaxr.min.js</code></li>
+<li>Install with <a href="http://bower.io">Bower</a>: <code>bower install jquery-pjaxr</code>.</li>
+</ul>
+
+<h2>Dependencies</h2>
+
+<p>Requires jQuery 1.8.x or higher.</p>
+
+<h2>Usage</h2>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">pjaxr</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>That&#39;s all you need to activate pjaxr functionality.</p>
+
+<p>If you only want to bind pjaxr when it&#39;s supported by the user&#39;s browser, you can activate pjaxr like this:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">support</span><span class="p">.</span><span class="nx">pjaxr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">pjaxr</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Or you can call the click handler by yourself and wrap it with some additional start functionality like this:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">support</span><span class="p">.</span><span class="nx">pjaxr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#some-menu&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s1">&#39;a[data-pjaxr]&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">pjaxr</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Or you can make a pjaxr request by pure calling:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">pjaxr</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="s1">&#39;/about/&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">timeout</span><span class="o">:</span> <span class="mi">1337</span><span class="p">});</span>
+</code></pre></div>
+<p>If you are migrating an existing site you probably don&#39;t want to enable pjaxr everywhere just yet.  Instead of using a global selector like <code>a</code> try annotating pjaxrable links with <code>data-pjaxr</code>, then use <code>&#39;a[data-pjaxr]&#39;</code> as your selector.</p>
+
+<h3>data-pjaxr-namespace</h3>
+
+<p>There is also the possibility to add a <code>data-pjaxr-namespace</code> to the body which will then be set as <code>X-PJAX-NAMESPACE</code> in the request header.  This is just for initialising the namespace - Any further values should come from pjaxr responses via <code>&lt;pjaxr-namespace&gt;</code>.</p>
+
+<p>By passing the namespace it&#39;s possible to limit the replacement area on the server side.  Checkout existing pjaxr libraries below.</p>
+
+<h2>Settings</h2>
+
+<p>Of course there are some options which will change your pjaxr behavior:</p>
+
+<ul>
+<li><code>timeout</code>: the time in ms pjaxr will wait for a server response before hard loading the page. (default: <code>650</code>)</li>
+<li><code>push</code>: determines whether to push the pjaxr request or not (default: <code>true</code>)</li>
+<li><code>replace</code>: determines whether to replace the history state or not. will be ignored if <code>push</code> is <code>true</code>. (default: <code>false</code>)</li>
+<li><code>scrollTo</code>: position in pixel the to scroll after pjaxring. (default: <code>0</code>)</li>
+<li><code>version</code>: delivered pjaxr version. used to compare with <code>X-PJAX-VERSION</code> of the response header to force hard load on mismatch. (default: <code>&lt;meta http-equiv=&quot;X-PJAX-VERSION&quot; content=&quot;...&quot;&gt;</code>)</li>
+</ul>
+
+<p>You can either pass them as a second parameter on your <code>pjaxr</code> call or override them globally via <code>$.fn.pjaxr.defaults</code>.</p>
+
+<h2>Signals</h2>
+
+<p>jquery-pjaxr fires a number of events regardless of how its invoked.</p>
+
+<p>All events are fired from the document, cause the actions concern the whole page.</p>
+
+<h3>start and end</h3>
+
+<ul>
+<li><code>pjaxr:start</code> - Fired when a pjaxr request is made or <code>popstate</code> is triggered.</li>
+<li><code>pjaxr:end</code> - Fired when a pjaxr request ends or <code>popstate</code> is triggered.</li>
+<li><code>pjaxr:click</code> - Fired when a pjaxr link is clicked.</li>
+</ul>
+
+<h3>ajax related</h3>
+
+<ul>
+<li><code>pjaxr:beforeSend</code> - Fired before the pjaxr request begins. Preventing this event will abort the request.</li>
+<li><code>pjaxr:send</code> - Fired after the pjaxr request begins.</li>
+<li><code>pjaxr:always</code> - Fired after the pjaxr request finishes.</li>
+<li><code>pjaxr:success</code> - Fired after the pjaxr request succeeds.</li>
+<li><code>pjaxr:done</code> - Fired after the pjaxr request is processed successfully.</li>
+<li><code>pjaxr:fail</code> - Fired after the pjaxr request fails. Preventing this event will disable fallback redirect.</li>
+<li><code>pjaxr:timeout</code> - Fired if after timeout is reached. Preventing this event will disable the fallback and will wait indefinitely until the response returns.</li>
+</ul>
+
+<p><code>send</code> and <code>complete</code> are a good pair of events to use if you are implementing a loading indicator. They&#39;ll only be triggered if an actual request is made, not if it&#39;s loaded from cache.</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pjaxr:send&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#loading&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pjaxr:complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#loading&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></div>
+<h2>Response Structure &amp; Rules</h2>
+
+<p>Check if the request header have <strong>X-PAX</strong> set and return rendered html in like this format:</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;pjaxr-head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>...<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;...&quot;</span> <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">&quot;...&quot;</span> <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;...&quot;</span> <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;...&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;style&gt;</span><span class="o">...</span><span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;/pjaxr-head&gt;</span>
+<span class="nt">&lt;pjaxr-body&gt;</span>
+    <span class="nt">&lt;...</span> <span class="na">id=</span><span class="s">&quot;...&quot;</span> <span class="err">...</span><span class="nt">&gt;&lt;/...&gt;</span>
+    <span class="nt">&lt;...</span> <span class="na">id=</span><span class="s">&quot;...&quot;</span> <span class="err">...</span><span class="nt">&gt;&lt;/...&gt;</span>
+    <span class="nt">&lt;...</span> <span class="na">id=</span><span class="s">&quot;...&quot;</span> <span class="err">...</span><span class="nt">&gt;&lt;/...&gt;</span>
+<span class="nt">&lt;/pjaxr-body&gt;</span>
+<span class="nt">&lt;pjaxr-namespace&gt;</span>...<span class="nt">&lt;/pjaxr-namespace&gt;</span>
+</code></pre></div>
+<ul>
+<li><code>pjaxr-head</code> and <code>pjaxr-body</code> are optional but if both are missing, pjaxr will hard load the giving url.</li>
+<li><code>pjaxr-head</code>
+
+<ul>
+<li><code>title</code> will always be replaced if given.</li>
+<li><code>meta</code> will be replaced if <code>name</code> or <code>property</code> find a match, otherwise it will be appended.</li>
+<li><code>link</code> will be replaced if <code>href</code> finds a match, otherwise it will be appended.</li>
+<li><code>script</code> will be replaced if <code>href</code> finds a match, otherwise it will be appended.</li>
+<li><code>style</code> will always be appended.</li>
+<li><code>data-remove-on-pjaxr</code> can the written to any tag and will force the element to be removed with the next pjaxr request.</li>
+</ul></li>
+<li><code>pjaxr-body</code>
+
+<ul>
+<li>every child must have an id.</li>
+</ul></li>
+<li><code>pjaxr-namespace</code> is optional but when given - it&#39;s value will be passed on further request via <code>X-PJAX-NAMESPACE</code>.</li>
+<li>any other content will be ignored.</li>
+</ul>
+
+<h3>Existing Pjaxr Server Side Libraries</h3>
+
+<p>These libs are making use of the advanced pjaxr namespacing functionality:</p>
+
+<ul>
+<li>Django: <a href="https://github.com/iekadou/django-pjaxr">https://github.com/iekadou/django-pjaxr</a></li>
+</ul>
+
+<h3>Existing Pjax Server Side Libraries</h3>
+
+<p>There are many available plugins for different languages and frameworks which will lift the heavy work for you:</p>
+
+<ul>
+<li>Asp.Net MVC3: <a href="http://biasecurities.com/blog/2011/using-pjax-with-asp-net-mvc3/">http://biasecurities.com/blog/2011/using-pjax-with-asp-net-mvc3/</a></li>
+<li>Aspen: <a href="https://gist.github.com/whit537/6059536">https://gist.github.com/whit537/6059536</a></li>
+<li>CakePHP : <a href="https://github.com/sanojimaru/CakePjax">https://github.com/sanojimaru/CakePjax</a></li>
+<li>Django: <a href="https://github.com/jacobian/django-pjax">https://github.com/jacobian/django-pjax</a></li>
+<li>Express: <a href="https://github.com/abdelsaid/express-pjax-demo">https://github.com/abdelsaid/express-pjax-demo</a></li>
+<li>Flask: <a href="https://github.com/zachwill/pjax_flask">https://github.com/zachwill/pjax_flask</a></li>
+<li>FuelPHP: <a href="https://github.com/rcrowe/fuel-pjax">https://github.com/rcrowe/fuel-pjax</a></li>
+<li>Grails: <a href="http://www.bobbywarner.com/2012/04/23/add-some-pjax-to-grails/">http://www.bobbywarner.com/2012/04/23/add-some-pjax-to-grails/</a></li>
+<li>Rails: <a href="https://github.com/rails/pjax_rails">https://github.com/rails/pjax_rails</a></li>
+</ul>
+
+<h2>Sites using jquery-pjaxr</h2>
+
+<p>If you are using this library and want to get listed below.  Please let me know.  Just make a pull request or write me an <a href="http://www.google.com/recaptcha/mailhide/d?k=013hG570A7Q8W8N-mLwG_KYA==&amp;amp;c=Si_w84-xzI8tECjbipjghuMGRCyZRSrgBkV5ZFp61IY=" title="Reveal my email address">email</a>.</p>
+
+<ul>
+<li><a href="https://www.socialfunders.org">https://www.socialfunders.org</a></li>
+<li><a href="http://www.noxic-action.de/page/">http://www.noxic-action.de/page/</a></li>
+</ul>
+
+<h2>Contributing</h2>
+
+<p>Help is appreciated!</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ git clone https://github.com/minddust/jquery-pjaxr.git
+$ cd jquery-pjaxr/
+$ python ./tests/app.py
+$ phantomjs ./tests/run-qunit.js &quot;http://localhost:5000/&quot;
+</code></pre></div>
+<p>You may need to install <strong>flask</strong> to run the <code>app.py</code> and <strong>phantomjs</strong> to start the tests.</p>
+
+<h2>Thanks</h2>
+
+<p>I like to thank <a href="https://github.com/defunkt">Chris Wanstrath</a> for his really awesome <a href="https://github.com/defunkt/jquery-pjax">jquery-pjax</a> library.  This project wouldn&#39;t exist without his work.</p>
+
+<h2>Copyright and license</h2>
+
+<p>Copyright 2013 Stephan Groß, under <a href="https://github.com/minddust/jquery-pjaxr/blob/master/LICENSE">MIT license</a>.</p>
+
+<p>Want to appreciate my work? <a href="https://www.gittip.com/minddust/">minddust at Gittip</a></p>
+
+
+    </div>
+
+
+                </div>
+            </div>
+            <div id="push"></div>
+        </div>
+        <footer>
+            <div class="footer-table">
+                <div class="footer-cell">&ndash; david-dahan.com &ndash;</div>
+            </div>
+        </footer>
+        <script src="/res/minddust.min.js"></script>
+    </body>
+</html>

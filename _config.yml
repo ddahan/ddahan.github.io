@@ -1,4 +1,4 @@
-timezone: Europe/Berlin
+timezone: Europe/Paris
 highlighter: pygments
 markdown: redcarpet
 permalink: /post/:title
@@ -14,12 +14,12 @@ paginate_path: '/blog/:num'
 excerpt_separator: "\n\n\n"
 
 # own settings
-name: minddust
-domain: minddust.com
-url: http://www.minddust.com
-description: Portfolio website of Stephan Groß
-copyright: 2013&mdash;2015
+name: home
+domain: david-dahan.com
+url: http://www.david-dahan.com
+description: Portfolio website of David Dahan
 author:
-    name: Stephan Groß
-    github_link: https://github.com/minddust
-    twitter_link: https://twitter.com/minddust
+    name: David Dahan
+    github_link: https://github.com/ddahan
+    stackoverflow_link: http://stackoverflow.com/users/2255491/
+    linkedin_link : http://fr.linkedin.com/in/daviddahanepita/

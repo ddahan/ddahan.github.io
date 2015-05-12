@@ -25,21 +25,21 @@
                         </div>
                     <![endif]-->
                     <a href="/" class="label label-darkblue">{{ site.name }}</a>
-                    <a href="/blog/" class="label label-darkblue" data-toggle="tooltip" title="Articles"><i class="fa fa-bars"></i></a>
-                    <a href="/projects/" class="label label-darkblue" data-toggle="tooltip" title="Projects"><i class="fa fa-rocket"></i></a>
+                    <a href="/blog/" class="label label-darkblue" data-toggle="tooltip" title="Blog Articles"><i class="fa fa-bars"></i></a>
+                    <a href="/projects/" class="label label-darkblue" data-toggle="tooltip" title="Personal Projects"><i class="fa fa-rocket"></i></a>
                     <a href="/feed.xml" class="label label-darkblue" data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a>
-                    <a href="{{ site.author.github_link }}" class="label label-darkblue" data-toggle="tooltip" title="GitHub"><i class="fa fa-github"></i></a>
-                    <a href="{{ site.author.twitter_link }}" class="label label-darkblue" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="{{ site.author.linkedin_link }}" class="label label-darkblue" data-toggle="tooltip" title="Linked In"><i class="fa fa-linkedin"></i></a>
+                    <a href="{{ site.author.stackoverflow_link }}" class="label label-darkblue" data-toggle="tooltip" title="Stack Overflow"><i class="fa fa-stack-overflow"></i></a>
                 </div>
                 <div id="content">
-{{ content }}
+                    {{ content }}
                 </div>
             </div>
             <div id="push"></div>
         </div>
         <footer>
             <div class="footer-table">
-                <div class="footer-cell">&copy; {{ site.domain }}, {{ site.copyright }} &ndash; <a href="/imprint/">imprint</a></div>
+                <div class="footer-cell">&ndash; {{ site.domain }} &ndash;</div>
             </div>
         </footer>
         <script src="/res/minddust.min.js"></script>

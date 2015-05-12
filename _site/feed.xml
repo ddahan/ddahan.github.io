@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>david-dahan.com</title>
+    <link rel="self" href="http://www.david-dahan.com/feed.xml"/>
+    <link rel="alternate" type="text/html" href="http://www.david-dahan.com"/>
+    <updated>2015-05-12T01:59:02+02:00</updated>
+    <id>http://www.david-dahan.com</id>
+    <author>
+        <name>David Dahan</name>
+    </author>
+    
+        <entry>
+            <title type="html">How To Use Tags And Categories On GitHub Pages Without Plugins</title>
+            <link href="http://www.david-dahan.com/post/tags-and-categories-on-github-pages"/>
+            <published>2014-08-03T00:00:00+02:00</published>
+            <id>http://www.david-dahan.com/post/tags-and-categories-on-github-pages</id>
+            <content type="html">&lt;p&gt;&lt;a href=&quot;http://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; service is just awesome!&lt;/p&gt;
+
+&lt;p&gt;And with the jekyll integration it even get’s more awesome! :D&lt;/p&gt;
+
+&lt;p&gt;But there are some limitations of this big automated system:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;no own plugins&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://pages.github.com/versions/&quot;&gt;limited available plugins&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As you may know:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;no tag / category plugins are (currently) available.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sad.. But that was something I really wanted to have!&lt;/p&gt;
+
+&lt;p&gt;So I built my own Data-Template-NoPlugin-System and it works.&lt;/p&gt;
+
+&lt;p&gt;You can see a live demo on this page.&lt;/p&gt;
+
+&lt;p&gt;Here is a little guide how to implement it yourself:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;add some template logic on top of your &lt;strong&gt;post layout&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html+django&quot; data-lang=&quot;html+django&quot;&gt;&lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assign&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;post.tags.size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;capture&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;tags_content&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;Posted with &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;post.tags.size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;i&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;fa fa-tag&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/i&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;i&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;fa fa-tags&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/i&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endif&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;: &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endcapture&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;post_tag&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;post.tags&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+        &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;data_tag&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;site.data.tags&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+            &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;data_tag.slug&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;post_tag&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+                &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assign&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;data_tag&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+            &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endif&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+        &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endfor&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+        &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+            &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;capture&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;tags_content_temp&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}{{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;tags_content&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/blog/tag/&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;{{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;tag.slug&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;{{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;tag.name&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;forloop&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;.last&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;, &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endif&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endcapture&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+            &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assign&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;tags_content&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;tags_content_temp&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+        &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endif&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endfor&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assign&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;tags_content&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endif&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;place the generated tag content wherever you like inside your &lt;strong&gt;post layout&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;post-meta&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ tags_content }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;create a &lt;strong&gt;blog_by_tag&lt;/strong&gt; layout&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Articles by tag :{{ page.tag }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    {% if site.tags[page.tag] %}
+        {% for post in site.tags[page.tag] %}
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{{ post.url }}/&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ post.title }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+        {% endfor %}
+    {% else %}
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;There are no posts for this tag.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    {% endif %}
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;annotate your &lt;strong&gt;post entry&lt;/strong&gt; front-matter block as usual:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;post&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;How To Use Tags And Categories On GitHub Pages Without Plugins&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;programming&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p-Indicator&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;github-pages&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;jekyll&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;for every used tag you have to add an entry inside your &lt;strong&gt;_data/tags.yml&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;p-Indicator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;slug&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;github-pages&lt;/span&gt;
+  &lt;span class=&quot;l-Scalar-Plain&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;GitHub Pages&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;for every used tag you have to add an empty template - e.g. &lt;strong&gt;blog/tag/github-pages.md&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;blog_by_tag&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;github-pages&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;permalink&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;/blog/tag/github-pages/&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For a more complex implementation and categories: &lt;a href=&quot;https://github.com/minddust/minddust.github.io&quot;&gt;check out my repository&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;strong&gt;Updates&lt;/strong&gt; (Feb. 12, 2015):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Added missing `` (thanks &lt;a href=&quot;https://github.com/cdr255&quot;&gt;Christopher Rodriguez&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Updates&lt;/strong&gt; (Apr. 4, 2015):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Switch to absolute permalinks (which is forced by jekyll 2.0+)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+            <author>
+                <name>David Dahan</name>
+            </author>
+        </entry>
+    
+        <entry>
+            <title type="html">fa2png.io</title>
+            <link href="http://www.david-dahan.com/post/fa2png"/>
+            <published>2014-05-27T00:00:00+02:00</published>
+            <id>http://www.david-dahan.com/post/fa2png</id>
+            <content type="html">&lt;p&gt;After a 12 hour hackathon we (&lt;a href=&quot;http://jannikweyrich.com/&quot;&gt;jannik&lt;/a&gt; and I) released &lt;a href=&quot;http://fa2png.io/&quot;&gt;fa2png.io&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It’s an Font-Awesome-To-PNG-Online-Converter.&lt;/p&gt;
+
+&lt;p&gt;Follow the discussion on &lt;a href=&quot;https://news.ycombinator.com/item?id=7805594&quot;&gt;hackernews&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Hope you like it. Have fun =)&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;strong&gt;Updates&lt;/strong&gt; (Jun. 2, 2014):&lt;/p&gt;
+
+&lt;p&gt;Received a lot of feedback on twitter and stunningly 109 points on Hacker News.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/res/fa2png/hackernews-ranking.png&quot; alt=&quot;Hacker News Screenshot&quot;&gt;&lt;/p&gt;
+</content>
+            <author>
+                <name>David Dahan</name>
+            </author>
+        </entry>
+    
+        <entry>
+            <title type="html">OpenSourced minddust.com</title>
+            <link href="http://www.david-dahan.com/post/opensourced-minddust-com"/>
+            <published>2014-04-11T00:00:00+02:00</published>
+            <id>http://www.david-dahan.com/post/opensourced-minddust-com</id>
+            <content type="html">&lt;p&gt;A friend ask me if he could see my &lt;a href=&quot;http://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; setup. &lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Well sure just look at my repositories&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;But than i noticed that it&amp;#39;s private for no reason - so here we go!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/minddust/minddust.github.io&quot;&gt;https://github.com/minddust/minddust.github.io&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;tl;dr&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Maybe there are some things you like to know or wanna see:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;All script or style changes are compiled and commited locally&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/minddust/minddust.github.io/blob/master/_data&quot;&gt;data files&lt;/a&gt; workaround to filter by &lt;a href=&quot;https://github.com/minddust/minddust.github.io/blob/master/_layouts/blog_by_category.html&quot;&gt;category&lt;/a&gt; and by &lt;a href=&quot;https://github.com/minddust/minddust.github.io/blob/master/_layouts/blog_by_tag.html&quot;&gt;tag&lt;/a&gt; (&lt;em&gt;cause GitHub’s jekyll setup doesn’t allow you to use plugins&lt;/em&gt;)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/minddust/minddust.github.io/blob/master/_layouts/post.html&quot;&gt;post&lt;/a&gt; usage of data information&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+            <author>
+                <name>David Dahan</name>
+            </author>
+        </entry>
+    
+        <entry>
+            <title type="html">Switch To GitHub Pages</title>
+            <link href="http://www.david-dahan.com/post/switch-to-github-pages"/>
+            <published>2014-01-15T00:00:00+01:00</published>
+            <id>http://www.david-dahan.com/post/switch-to-github-pages</id>
+            <content type="html">&lt;p&gt;Today I switched from my former vps + django setup to github + jekyll aka &lt;a href=&quot;http://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Main reasons in no particular order:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;no security updates&lt;/li&gt;
+&lt;li&gt;no worries about crashing servers&lt;/li&gt;
+&lt;li&gt;no server costs&lt;/li&gt;
+&lt;li&gt;no need for any dynamic content&lt;/li&gt;
+&lt;li&gt;highly available through GitHub cdn&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I am really impressed of this awesome GitHub feature!&lt;/p&gt;
+</content>
+            <author>
+                <name>David Dahan</name>
+            </author>
+        </entry>
+    
+        <entry>
+            <title type="html">Django Spaceless With Preserved Pre Formatting</title>
+            <link href="http://www.david-dahan.com/post/django-spaceless-with-preserved-pre-formatting"/>
+            <published>2013-12-31T00:00:00+01:00</published>
+            <id>http://www.david-dahan.com/post/django-spaceless-with-preserved-pre-formatting</id>
+            <content type="html">&lt;p&gt;I&amp;#39;m using Django&amp;#39;s &lt;a href=&quot;https://docs.djangoproject.com/en/dev/ref/templates/builtins/#spaceless&quot;&gt;spaceless&lt;/a&gt; template-tag a lot, but after adding some code inside a &lt;code&gt;pre&lt;/code&gt; tag I recognised that everything left is a squeezed string. I never came up with that problem before. The builtin spaceless tag is doing just fine. So after a little bit of searching I quickly found some resources about that topic:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://code.djangoproject.com/ticket/15798&quot;&gt;https://code.djangoproject.com/ticket/15798&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.mail-archive.com/django-developers@googlegroups.com/msg09235.html&quot;&gt;http://www.mail-archive.com/django-developers@googlegroups.com/msg09235.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Summary:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;not possible with builtin methods&lt;/li&gt;
+&lt;li&gt;not coming with future versions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It was my fault to expect something different from a tag which does exactly what it should.&lt;/p&gt;
+
+&lt;p&gt;But this doesn&amp;#39;t matter - let&amp;#39;s build a new template tag that does the trick! :)&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;sd&quot;&gt;&amp;quot;&amp;quot;&amp;quot;Copyright (c) 2013-2014 Stephan Groß, under MIT license.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;__future__&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unicode_literals&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;template&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django.template&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Node&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django.utils&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;six&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django.utils.encoding&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;force_text&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django.utils.functional&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allow_lazy&lt;/span&gt;
+
+
+&lt;span class=&quot;n&quot;&gt;register&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;strip_spaces_between_tags_except_pre&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;replacement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;matches&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# save the whole match without leading &amp;quot;&amp;lt;&amp;quot; and trailing &amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;lt;}&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# add &amp;quot;&amp;lt;&amp;quot; and &amp;quot;&amp;gt;&amp;quot; to preserve space stripping&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;matches&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;&amp;lt;pre(\s.*)?&amp;gt;(.*?)&amp;lt;/pre&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;replacement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;force_text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;I&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r&amp;#39;&amp;gt;\s+&amp;lt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;gt;&amp;lt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;force_text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;strip_spaces_between_tags_except_pre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allow_lazy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip_spaces_between_tags_except_pre&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;six&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpacelessExceptPreNode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodelist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nodelist&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nodelist&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strip_spaces_between_tags_except_pre&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nodelist&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+
+&lt;span class=&quot;nd&quot;&gt;@register.tag&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;spaceless_except_pre&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;sd&quot;&gt;&amp;quot;&amp;quot;&amp;quot;Remove whitespace between HTML tags, including tab and newline characters except content between &amp;lt;pre&amp;gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;nodelist&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;endspaceless_except_pre&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delete_first_token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SpacelessExceptPreNode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nodelist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;also available as &lt;a href=&quot;https://gist.github.com/minddust/8196664&quot;&gt;Gist&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Just put this snippet in a new file (like &lt;code&gt;spaceless_except_pre.py&lt;/code&gt;) inside your &lt;code&gt;templatetags&lt;/code&gt; folder.&lt;/p&gt;
+
+&lt;p&gt;Now you can load and apply this tag inside your template like:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html-django&quot; data-lang=&quot;html+django&quot;&gt;&lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;spaceless_except_pre&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;spaceless_except_pre&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;codehilite&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;pre&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;code&amp;gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;k&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;def&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;nf&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;hello&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;p&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;():&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;k&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;print&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;s&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;&amp;amp;quot;&lt;/span&gt;world&lt;span class=&quot;ni&quot;&gt;&amp;amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/code&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/pre&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endspaceless_except_pre&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which will result in:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;codehilite&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;pre&amp;gt;&amp;lt;code&amp;gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;k&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;def&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;nf&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;hello&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;p&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;():&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;k&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;print&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;s&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;&amp;amp;quot;&lt;/span&gt;world&lt;span class=&quot;ni&quot;&gt;&amp;amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and frontend:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;def hello():
+    print &amp;quot;world&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You could also take a look at the source of this post for a bigger example.&lt;/p&gt;
+
+&lt;p&gt;For those of you who like digging deeper, I simply matched all &lt;code&gt;&amp;lt;pre&amp;gt;..&amp;lt;/pre&amp;gt;&lt;/code&gt; blocks and call a &lt;code&gt;replacement&lt;/code&gt; method. Inside that method I:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;append the original content to a list.&lt;/li&gt;
+&lt;li&gt;increment a counter&lt;/li&gt;
+&lt;li&gt;replace the matched pre block content with a placeholder&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The trick is that the replaced content with the individual id fits the python string &lt;a href=&quot;http://docs.python.org/2/library/stdtypes.html#str.format&quot;&gt;format&lt;/a&gt; method syntax. So after stripping out all whitespaces between the tags I call format and pass my filled matched list.&lt;/p&gt;
+
+&lt;p&gt;And that&amp;#39;s it. Thank you for reading.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;strong&gt;Updates&lt;/strong&gt; (Jan. 1, 2014):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Improved script to save complete original expression and ignore cases.&lt;/li&gt;
+&lt;li&gt;Fix example to use highlighted code (which causes the troubles)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;P.S.: Plain text is doing just fine with the default spaceless tag cause it isn&amp;#39;t affected by the strip regex.&lt;/p&gt;
+</content>
+            <author>
+                <name>David Dahan</name>
+            </author>
+        </entry>
+    
+        <entry>
+            <title type="html">Finally Some Content</title>
+            <link href="http://www.david-dahan.com/post/finally-some-content"/>
+            <published>2013-11-11T00:00:00+01:00</published>
+            <id>http://www.david-dahan.com/post/finally-some-content</id>
+            <content type="html">&lt;p&gt;One of my biggest problems with my own websites (since 2001) was always pushing content.&lt;/p&gt;
+
+&lt;p&gt;Or.. was it to finish the never ending design part which don&amp;#39;t let me do it?&lt;/p&gt;
+
+&lt;p&gt;However - this is now an attempt to do better! ;-)&lt;/p&gt;
+</content>
+            <author>
+                <name>David Dahan</name>
+            </author>
+        </entry>
+    
+</feed>

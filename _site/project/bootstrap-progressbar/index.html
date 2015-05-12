@@ -1,0 +1,365 @@
+<!DOCTYPE html><!-- 01101101 01101001 01101110 01100100 01100100 01110101 01110011 01110100 -->
+<html lang="en">
+    <head>
+        <title>david-dahan.com &ndash; bootstrap-progressbar</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="author" content="David Dahan">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" href="/res/favicon-152.png">
+        <link rel="stylesheet" type="text/css" href="/res/minddust.min.css">
+        <script src="/res/common.min.js"></script>
+        <link rel="alternate" type="application/rss+xml" title="home" href="/feed.xml">
+    </head>
+    <body>
+        <div id="site">
+            <div class="container">
+                <div id="header">
+                    <!--[if lt IE 8]>
+                        <div class="alert alert-danger">
+                            <p><b>You are using an outdated browser!</b></p>
+                            <p>This can lead to some serious problems and is generally unsave!</p>
+                            <p>Please use new version of <a href='http://www.mozilla.org/firefox'>Firefox</a>, <a href='http://www.google.com/chrome'>Chrome</a> or <a href='http://www.apple.com/safari'>Safari</a>.</p>
+                        </div>
+                    <![endif]-->
+                    <a href="/" class="label label-darkblue">home</a>
+                    <a href="/blog/" class="label label-darkblue" data-toggle="tooltip" title="Blog Articles"><i class="fa fa-bars"></i></a>
+                    <a href="/projects/" class="label label-darkblue" data-toggle="tooltip" title="Personal Projects"><i class="fa fa-rocket"></i></a>
+                    <a href="/feed.xml" class="label label-darkblue" data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a>
+                    <a href="http://fr.linkedin.com/in/daviddahanepita/" class="label label-darkblue" data-toggle="tooltip" title="Linked In"><i class="fa fa-linkedin"></i></a>
+                    <a href="http://stackoverflow.com/users/2255491/" class="label label-darkblue" data-toggle="tooltip" title="Stack Overflow"><i class="fa fa-stack-overflow"></i></a>
+                </div>
+                <div id="content">
+                    
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+    <header id="post-header">
+        <h1 id="post-title">bootstrap-progressbar</h1>
+        <h4 id="post-subtitle">jQuery plugin for twitter bootstrap's progressbar (v2 & v3) for displaying text and animations</h4>
+    </header>
+
+    <div id="post-content">
+        <ul class="nav nav-pills">
+            
+                <li class="active"><a href="#">Overview</a></li>
+            
+            
+            
+                
+                    <li><a href="/project/bootstrap-progressbar/demo/">Demo</a></li>
+                
+            
+            
+                
+                    <li><a href="/project/bootstrap-progressbar/changelog/">Changelog</a></li>
+                
+            
+            
+                <li><a href="https://github.com/minddust/bootstrap-progressbar">GitHub</a></li>
+            
+        </ul>
+        <h1>bootstrap-progressbar - 0.8.5</h1>
+
+<p><code>bootstrap-progressbar</code> is a <a href="http://jquery.com">jQuery</a> plugin which extends the basic <a href="https://github.com/twbs/bootstrap">twitter-bootstrap</a> progressbar. It provides the ability to animate the progressbar by adding Javascript in combination with the preexisting css transitions. Additionally you can display the current progress information in the bar or get the value via callback.</p>
+
+<h2>What&#39;s new in v0.8.0 - v0.8.5?</h2>
+
+<ul>
+<li>Add SCSS support</li>
+<li>Add bootstrap 3.3.4 styles</li>
+<li>Add bootstrap 3.3.2 styles</li>
+<li>Add bootstrap 3.3.1 styles</li>
+<li>Add bootstrap 3.3.0 styles</li>
+<li>Add bootstrap 3.2.0 styles</li>
+<li>Extend <code>amount_format</code> hook for min value</li>
+<li>Update demo page</li>
+<li>Remove unused travis badge</li>
+<li>Fix #27 switch <code>aria-valuetransitionsgoal</code> to <code>data-transitionsgoal</code></li>
+<li>Fix #35 wrong amount calculation for <code>aria-valuemin</code> != 0</li>
+<li>Fix #33 pass <code>$this</code> to <code>update</code> and <code>done</code> callback</li>
+<li>Fix #39 revert low percentage styles in bootstrap 3.2</li>
+</ul>
+
+<blockquote>
+<p><strong>Note</strong>: this version replaces the not official supported <code>aria-valuetransitionsgoal</code> with <code>data-transitionsgoal</code> which may affect (or brick) your progressbars.</p>
+
+<p><strong>Note</strong>: Bootstrap&#39;s <a href="http://getbootstrap.com/components/#progress-low-percentages">low percentage styles</a> (introduced in 3.2.0) causes flickering under some circumstances (e.g. slow transitions). To preserve correct progressbar functionality + appearance this bs feature is reverted in v0.8.3. (and reverted by bootstrap in 3.3.0)</p>
+
+<p><strong>Note</strong>: Stacked progressbars are not supported by now.</p>
+</blockquote>
+
+<h2>Demo</h2>
+
+<ul>
+<li><a href="http://www.minddust.com/project/bootstrap-progressbar/demo/">http://www.minddust.com/project/bootstrap-progressbar/demo/</a></li>
+</ul>
+
+<h2>Installation</h2>
+
+<ul>
+<li>Download the latest release: <a href="https://github.com/minddust/bootstrap-progressbar/archive/v0.8.5.zip">v0.8.5</a></li>
+<li>Clone the repository: <code>git clone git@github.com:minddust/bootstrap-progressbar.git</code></li>
+<li>Install with <a href="http://bower.io">Bower</a>: <code>bower install bootstrap-progressbar</code></li>
+</ul>
+
+<h2>Usage</h2>
+
+<ol>
+<li><p>include <code>bootstrap-progressbar.js</code></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;bootstrap-progressbar.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></li>
+<li><p>activate <code>bootstrap-progressbar</code> functionality on progressbars of your choice:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.progress .bar&#39;</span><span class="p">).</span><span class="nx">progressbar</span><span class="p">();</span>           <span class="c1">// bootstrap 2</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.progress .progress-bar&#39;</span><span class="p">).</span><span class="nx">progressbar</span><span class="p">();</span>  <span class="c1">// bootstrap 3</span>
+</code></pre></div></li>
+<li><p>set the <code>aria</code> attribute and <strong>remove</strong> the <code>width</code> style attribute (alternatively you can set it to 0)</p>
+
+<ol>
+<li><p><code>data-transitiongoal</code></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;progress&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;progress-bar&quot;</span> <span class="na">data-transitiongoal=</span><span class="s">&quot;75&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></li>
+<li><p><code>aria-valuemin</code> (default: 0) and <code>aria-valuemax</code> (default: 100)</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;progress&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;progress-bar&quot;</span> <span class="na">data-transitiongoal=</span><span class="s">&quot;75&quot;</span> <span class="na">aria-valuemin=</span><span class="s">&quot;-1337&quot;</span> <span class="na">aria-valuemax=</span><span class="s">&quot;9000&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></li>
+</ol></li>
+</ol>
+
+<h2>Usage Extended</h2>
+
+<ul>
+<li><p>Do I need the additional style file?</p>
+
+<ul>
+<li>for the horizontal bar with no or filled text: <strong>NO</strong></li>
+<li><p>for any vertical bars or the horizontal bar with centered text or right aligned bar: <strong>YES</strong></p>
+
+<p>less:</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet/less&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;bootstrap-progressbar.less&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;less.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
+<p>or precompile it yourself. (see: <a href="http://lesscss.org/usage/#third-party-compilers-node-js-compilers">3rd party compilers</a>)</p>
+
+<p>scss:</p>
+
+<ul>
+<li>need to precompile it yourself (see: <a href="http://sass-lang.com/libsass">libsass</a>)</li>
+</ul>
+
+<p>css:</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;bootstrap-progressbar.css&quot;</span><span class="nt">&gt;</span>
+</code></pre></div>
+<p>you can find your needed css, less or scss files inside the specific subdirectories.</p></li>
+</ul></li>
+<li><p>Multiple trigger</p>
+
+<p>You can trigger progressbar as much as you want. Just change your attribute(s) and trigger <code>.progressbar()</code> again. All settings made before will be kept.</p></li>
+</ul>
+
+<h2>Settings</h2>
+
+<h3>default values</h3>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Progressbar</span><span class="p">.</span><span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">transition_delay</span><span class="o">:</span> <span class="mi">300</span><span class="p">,</span>
+    <span class="nx">refresh_speed</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="nx">display_text</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+    <span class="nx">use_percentage</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">percent_format</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">percent</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">percent</span> <span class="o">+</span> <span class="s1">&#39;%&#39;</span><span class="p">;</span> <span class="p">},</span>
+    <span class="nx">amount_format</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">amount_part</span><span class="p">,</span> <span class="nx">amount_total</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">amount_part</span> <span class="o">+</span> <span class="s1">&#39; / &#39;</span> <span class="o">+</span> <span class="nx">amount_total</span><span class="p">;</span> <span class="p">},</span>
+    <span class="nx">update</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">noop</span><span class="p">,</span>
+    <span class="nx">done</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">noop</span><span class="p">,</span>
+    <span class="nx">fail</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">noop</span>
+<span class="p">};</span>
+</code></pre></div>
+<h3>transition_delay</h3>
+
+<p>Is the time in milliseconds until the animation starts.</p>
+
+<p>This could be useful to delay the start on the initial page load like:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.progress .progress-bar&#39;</span><span class="p">).</span><span class="nx">progressbar</span><span class="p">({</span>
+        <span class="nx">transition_delay</span><span class="o">:</span> <span class="mi">1500</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3>refresh_speed</h3>
+
+<p>Is the time in milliseconds which will elapse between every text refresh, <code>aria-valuenow</code> attribute update and <code>update</code> callback call.</p>
+
+<h3>display_text</h3>
+
+<p>Determines if and where to display text on the progressbar. Possible options:</p>
+
+<ul>
+<li><code>none</code> <strong>no text</strong></li>
+<li><code>fill</code> <strong>text on filled bar</strong></li>
+<li><code>center</code> <strong>text on center</strong> <em>(this mode changes css / html due to styling requirements)</em></li>
+</ul>
+
+<h3>use_percentage</h3>
+
+<p>If text will be displayed - this option determines whether to show the percentage value or the amount.</p>
+
+<p>So if <code>use_percentage</code> is false and <code>aria-valuemin</code> and <code>aria-valuemax</code> are not set (or to <code>0</code> and <code>100</code>) the value will be the same but <code>amount_format</code> will be used to format the result.</p>
+
+<p>Example:</p>
+
+<p><code>&lt;div class=&quot;progress-bar&quot; data-transitiongoal=&quot;75&quot;&gt;</code></p>
+
+<p>with <code>use_percentage: true</code> is the final text: <code>75%</code></p>
+
+<p>with <code>use_percentage: false</code> is the final text: <code>75 / 100</code></p>
+
+<h3>percent_format</h3>
+
+<p>Is a function which returns the text format for progressbar with <code>use_percentage: true</code>.</p>
+
+<p>It takes 1 argument which is the current percent value.</p>
+
+<h3>amount_format</h3>
+
+<p>Is a function which returns the text format for progressbar with <code>use_percentage: false</code>.</p>
+
+<p>It takes 3 argument which are the current-, the max- and the min-amount.</p>
+
+<h3>update</h3>
+
+<p>Is a callback function which will be called while the progressbar is transitioning ;)</p>
+
+<p>Depends on <code>refresh_speed</code>.</p>
+
+<p>It takes 2 argument which is the current percent value and a reference to the attached progressbar element.</p>
+
+<h3>done</h3>
+
+<p>Is a callback function which will be called when the transition process is done.</p>
+
+<p>It takes 1 argument which is a reference to the attached progressbar element.</p>
+
+<h3>fail</h3>
+
+<p>Is a callback function which will be called when an error occurs.</p>
+
+<p>It takes 1 argument which is the error message.</p>
+
+<h2>Customisation</h2>
+
+<h3>alignment</h3>
+
+<ul>
+<li>to use a horizontal progressbar which is align to the right you have to add <code>right</code> to the <code>progress</code> element.</li>
+</ul>
+<div class="highlight"><pre><code class="language-html" data-lang="html">   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;progress right&quot;</span><span class="nt">&gt;</span>
+</code></pre></div>
+<ul>
+<li>to use a vertical progressbar you have to add <code>vertical</code> to the <code>progress</code> element.</li>
+</ul>
+<div class="highlight"><pre><code class="language-html" data-lang="html">   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;progress vertical&quot;</span><span class="nt">&gt;</span>
+</code></pre></div>
+<ul>
+<li>to use a vertical progressbar which is align to the bottom you have to add <code>vertical</code> and <code>bottom</code> to the <code>progress</code> element.</li>
+</ul>
+<div class="highlight"><pre><code class="language-html" data-lang="html">   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;progress vertical bottom&quot;</span><span class="nt">&gt;</span>
+</code></pre></div>
+<h3>animation</h3>
+
+<p>to change the animation itself you have to overwrite either less or css</p>
+
+<ol>
+<li><p>horizontal</p>
+
+<ul>
+<li><p>less</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.progress</span> <span class="nc">.bar</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">transition</span><span class="p">(</span><span class="k">width</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><p>scss</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.progress.vertical</span> <span class="nc">.progress-bar</span> <span class="p">{</span>
+    <span class="o">@</span><span class="n">include</span> <span class="n">transition</span><span class="p">(</span><span class="k">width</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><p>css</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.progress</span> <span class="nc">.bar</span> <span class="p">{</span>
+    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">width</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
+    <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">width</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
+    <span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">width</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
+    <span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">width</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
+    <span class="n">transition</span><span class="o">:</span> <span class="k">width</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul></li>
+<li><p>vertical</p>
+
+<ul>
+<li><p>less</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.progress.vertical</span> <span class="nc">.bar</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">transition</span><span class="p">(</span><span class="k">height</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><p>scss</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.progress.vertical</span> <span class="nc">.bar</span> <span class="p">{</span>
+    <span class="o">@</span><span class="n">include</span> <span class="n">transition</span><span class="p">(</span><span class="k">height</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><p>css</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.progress.vertical</span> <span class="nc">.bar</span> <span class="p">{</span>
+    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">height</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
+    <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">height</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
+    <span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">height</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
+    <span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="k">height</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
+    <span class="n">transition</span><span class="o">:</span> <span class="k">height</span> <span class="m">2s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul></li>
+</ol>
+
+<h2>Known Problems</h2>
+
+<ul>
+<li>Looks like iOS Safari is flooring the width of the transition. So if you want to display text with a correct value you have to use a full bar width <strong>greater or equal 100px</strong>.</li>
+</ul>
+
+<h2>Copyright and license</h2>
+
+<p>Copyright 2013-2015 Stephan Groß, under <a href="https://github.com/minddust/bootstrap-progressbar/blob/master/LICENSE">MIT license</a>.</p>
+
+<p>Want to appreciate my work? <a href="https://www.gittip.com/minddust/">minddust at Gittip</a></p>
+
+
+    </div>
+
+
+                </div>
+            </div>
+            <div id="push"></div>
+        </div>
+        <footer>
+            <div class="footer-table">
+                <div class="footer-cell">&ndash; david-dahan.com &ndash;</div>
+            </div>
+        </footer>
+        <script src="/res/minddust.min.js"></script>
+    </body>
+</html>
