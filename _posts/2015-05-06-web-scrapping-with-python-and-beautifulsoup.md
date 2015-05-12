@@ -12,7 +12,7 @@ Aujourd’hui, nous allons expliquer et réaliser ensemble un script de scraping
 ##Qu’est-ce que le web scraping ?
 Il s’agit d’une technique d’extraction du contenu d’un site web via un programme. Une fois les données extraites (dans un fichier Excel, XML, ou une base de données par exemple), on peut s’en servir comme on le souhaite.
 
-![alt text](/res/misc/scrap.png "scraping picture")
+<img src="/res/misc/scrap.png" class="img-responsive">
 
 
 ##Un exemple avec Yelp
