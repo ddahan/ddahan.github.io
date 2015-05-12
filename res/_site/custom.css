@@ -1,9 +1,0 @@
-.email {
-  margin-top: 8px;
-  text-align: center;
-  font-size: 14px;
-}
-
-.email:before {
-  content: "david.dahan3@gmail.com";
-}
