@@ -6,7 +6,7 @@ tags: [python, scripting, tutorial]
 ---
 
 Aujourd’hui, nous allons expliquer et réaliser ensemble un script de scraping (_explications ci-dessous_) en utilisant le site de Yelp comme exemple.
-Le code complet de ce tutoriel est disponible sur [GitHub](https://github.com/ddahan?tab=repositories).
+[Le code complet de ce tutoriel est disponible sur GitHub](https://github.com/ddahan/yelp-scraper).
 
 ##Qu’est-ce que le web scraping ?
 Il s’agit d’une technique d’extraction du contenu d’un site web via un programme. Une fois les données extraites (dans un fichier Excel, XML, ou une base de données par exemple), on peut s’en servir comme on le souhaite.
@@ -75,7 +75,7 @@ Et voilà !
 
 Maintenant, nous allons étudier un peu plus en détail quelques parties intéressantes du code. Je ne vais pas coller les 200 lignes ici (ça ne serait pas intéressant), mais le script complet est disponible sur Github.
 
-Si jamais vous souhaitez refaire le projet de votre côté, vous devrez créer un virtualenv avec les packages suivants :
+Si jamais vous souhaitez refaire le projet de votre côté, vous devrez créer un virtualenv sous Python 3 et y installer les packages suivants :
 
 ```
 XlsxWriter==0.7.2
@@ -109,8 +109,7 @@ def build_yelp_url(page, c):
 ####Parsing HTML
 
 Nous utilisons ici la lib [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/) qui permet de faire du parsing HTML très simplement.
-Chaque commerce issu d'une page de résultat de recherche, est contenu dans une `<div class="search-result">`. Ceci ne peut pas deviné autrement qu'en regardant le code source de Yelp (l'inspecteur Chrome est très pratique pour ça).
-Pour récupérer chacune des portions HTML liées, il suffit donc de créer une liste :
+Chaque commerce issu d'une page de résultat de recherche, est contenu dans une `<div class="search-result">`. Ceci ne peut pas être deviné autrement qu'en regardant le code source de Yelp (l'inspecteur Chrome est très pratique pour ça). Pour récupérer chacune des portions HTML liées, il suffit donc de créer une liste :
 
 ```python
 search_results = soup.find_all('div', attrs={"class":u"search-result"}):
@@ -125,9 +124,7 @@ for sr in search_results:
 Le mécanisme est du même genre pour les autres informations à récupérer (adresse, téléphone, url, catégories, etc.)
 
 ####Retrait des annonces Yelp
-Certaines pages contiennent des annonces publicitaires qui viennent polluer nos résultats, puisque ces dernières ne correspondent en rien à nos filtres de recherche.
-<!-- Annonce image -->
-Pour les supprimer, il suffit d'observer la classe qui leur est associée, et d'écrire une fonction associée :
+Certaines pages contiennent des annonces publicitaires qui viennent polluer nos résultats, puisque ces dernières ne correspondent en rien à nos filtres de recherche. Pour les supprimer, il suffit d'observer la classe qui leur est associée, et d'écrire une fonction associée :
 
 ```python
 def is_advertisement(search_result):
@@ -143,7 +140,7 @@ def is_advertisement(search_result):
 
 Scraper des sites web n’est généralement pas apprécié par les sites en questions (ce qui est tout à fait compréhensible). Partez donc du principe que ces derniers feront tout leur possible pour vous compliquer la vie. Voici deux mesures très simples qui vont réduire les chances d’être identifié comme un “robot” :
 
-######Durée d’attente aléatoire entre chaque ouverture de page
+#####Durée d’attente aléatoire entre chaque ouverture de page
 
 Si votre script ouvre 30 pages en 5 secondes, vous donnez le baton pour vous faire battre puisqu’un humain n’agirait à priori jamais de la sorte. L’idée est donc de générer un sleep aléatoire à la fin de chaque tour de la boucle principale :
 
@@ -157,24 +154,36 @@ def r_sleep():
     mylog("Safety Random Sleep is over")
 ```
 
-######Passage d’en-têtes à la requête HTTP
+#####Passage d’en-têtes à la requête HTTP
 
 Comme vous le savez probablement, une requête HTTP créée par votre browser contient des en-têtes permettant au serveur de récupérer des informations telles que le navigateur utilisé, la version de votre OS, et beaucoup d’autres.
-Dans notre script, nous allons donc spécifier manuellement ces en-têtes afin que le serveur pense qu’il s’agisse d’un navigateur classique.
+Dans notre script, nous allons donc spécifier manuellement ces en-têtes afin que le serveur pense qu’il s’agisse d’un navigateur classique, avant d'effectuer la requête en question :
+
+``` python
+fake_headers = {
+    # Headers taken from Chrome spy mode
+    'Connection': 'keep-alive',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36',
+    'Accept-Encoding': 'gzip, deflate, sdch',
+    'Accept-Language': 'fr,en-US;q=0.8,en;q=0.6'}
+r = requests.get(cur_url, headers=fake_headers)
+```
 
 Notez qu’un site qui voudrait vraiment vous empêcher de scraper à tout prix, pourrait trouver d’autres moyens plus filous, comme un script JS qui analyserait les mouvements du pointeur de votre souris. Il y a d’ailleurs sûrement de nombreux autres méthodes que je ne connais pas.
 
 ## Conclusion
 
-C'est terminé. N'hésitez pas à jeter un coup d'oeil au code complet, car les bouts de code expliqués ne sont pas suffisants pour tout comprendre.
+C'est terminé. N'hésitez pas à jeter un coup d'oeil au [code complet](https://github.com/ddahan/yelp-scraper), car les bouts de code expliqués ne sont pas suffisants pour tout comprendre.
 
 Pour améliorer ce script, on pourrait par exemple :
+
 - rendre les fichiers xlsx créés évolutifs (on peut lancer le scrap pour mettre à jour uniquement les résultats qui ont changé, sans réécrire le fichier)
 - écrire dans le fichier Excel au fur et à mesure plutôt qu'à la fin
 
 Avez vous d’autres idées d’amélioration ?
 
-Notez aussi que ce genre de script n'a aucune garantie de fonctionner à travers le temps, puisque la moindre modif du côté de Yelp casserait son fonctionnement. N'hésitez pas à me le signaler si c'est le cas.
+Notez aussi que ce genre de script n'a aucune garantie de fonctionner à travers le temps, puisque la moindre modif du côté de Yelp casserait son fonctionnement. N'hésitez pas à me le signaler si c'était le cas.
 
-J'espère que pourra vous servir, à très bientôt !
+J'espère que ce 1er tutoriel vous aura été utile, à bientôt !
 
