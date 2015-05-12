@@ -8,11 +8,11 @@ tags: [python, scripting, tutorial]
 Aujourd’hui, nous allons expliquer et réaliser ensemble un script de scraping (_explications ci-dessous_) en utilisant le site de Yelp comme exemple.
 [Le code complet de ce tutoriel est disponible sur GitHub](https://github.com/ddahan/yelp-scraper).
 
+
 ##Qu’est-ce que le web scraping ?
 Il s’agit d’une technique d’extraction du contenu d’un site web via un programme. Une fois les données extraites (dans un fichier Excel, XML, ou une base de données par exemple), on peut s’en servir comme on le souhaite.
 
-
-![alt text](http://webdata-scraping.com/wp-content/uploads/2013/11/web-scraping-services.png "scraping scheme")
+![alt text](/res/misc/scrap.png "scraping picture")
 
 
 ##Un exemple avec Yelp

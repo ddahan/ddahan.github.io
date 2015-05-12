@@ -3,7 +3,7 @@
     <title>david-dahan.com</title>
     <link rel="self" href="http://www.david-dahan.com/feed.xml"/>
     <link rel="alternate" type="text/html" href="http://www.david-dahan.com"/>
-    <updated>2015-05-12T14:48:52+02:00</updated>
+    <updated>2015-05-12T18:02:36+02:00</updated>
     <id>http://www.david-dahan.com</id>
     <author>
         <name>David Dahan</name>
@@ -15,13 +15,13 @@
             <published>2015-05-06T00:00:00+02:00</published>
             <id>http://www.david-dahan.com/post/web-scrapping-with-python-and-beautifulsoup</id>
             <content type="html">&lt;p&gt;Aujourd’hui, nous allons expliquer et réaliser ensemble un script de scraping (&lt;em&gt;explications ci-dessous&lt;/em&gt;) en utilisant le site de Yelp comme exemple.
-Le code complet de ce tutoriel est disponible sur &lt;a href=&quot;https://github.com/ddahan?tab=repositories&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&quot;https://github.com/ddahan/yelp-scraper&quot;&gt;Le code complet de ce tutoriel est disponible sur GitHub&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2&gt;Qu’est-ce que le web scraping ?&lt;/h2&gt;
 
 &lt;p&gt;Il s’agit d’une technique d’extraction du contenu d’un site web via un programme. Une fois les données extraites (dans un fichier Excel, XML, ou une base de données par exemple), on peut s’en servir comme on le souhaite.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://webdata-scraping.com/wp-content/uploads/2013/11/web-scraping-services.png&quot; alt=&quot;alt text&quot; title=&quot;scraping scheme&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/res/misc/scrap.png&quot; alt=&quot;alt text&quot; title=&quot;scraping picture&quot;&gt;&lt;/p&gt;
 
 &lt;h2&gt;Un exemple avec Yelp&lt;/h2&gt;
 
@@ -81,7 +81,7 @@ Le code complet de ce tutoriel est disponible sur &lt;a href=&quot;https://githu
 
 &lt;p&gt;Maintenant, nous allons étudier un peu plus en détail quelques parties intéressantes du code. Je ne vais pas coller les 200 lignes ici (ça ne serait pas intéressant), mais le script complet est disponible sur Github.&lt;/p&gt;
 
-&lt;p&gt;Si jamais vous souhaitez refaire le projet de votre côté, vous devrez créer un virtualenv avec les packages suivants :&lt;/p&gt;
+&lt;p&gt;Si jamais vous souhaitez refaire le projet de votre côté, vous devrez créer un virtualenv sous Python 3 et y installer les packages suivants :&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;XlsxWriter==0.7.2
 beautifulsoup4==4.3.2
 requests==2.7.0
@@ -152,14 +152,13 @@ Dans notre script, nous allons donc spécifier manuellement ces en-têtes afin q
     &lt;span class=&quot;s&quot;&gt;&amp;#39;User-Agent&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;&amp;#39;Accept-Encoding&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;gzip, deflate, sdch&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;&amp;#39;Accept-Language&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;fr,en-US;q=0.8,en;q=0.6&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
 &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cur_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fake_headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Notez qu’un site qui voudrait vraiment vous empêcher de scraper à tout prix, pourrait trouver d’autres moyens plus filous, comme un script JS qui analyserait les mouvements du pointeur de votre souris. Il y a d’ailleurs sûrement de nombreux autres méthodes que je ne connais pas.&lt;/p&gt;
 
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 
-&lt;p&gt;C&amp;#39;est terminé. N&amp;#39;hésitez pas à jeter un coup d&amp;#39;oeil au code complet, car les bouts de code expliqués ne sont pas suffisants pour tout comprendre.&lt;/p&gt;
+&lt;p&gt;C&amp;#39;est terminé. N&amp;#39;hésitez pas à jeter un coup d&amp;#39;oeil au &lt;a href=&quot;https://github.com/ddahan/yelp-scraper&quot;&gt;code complet&lt;/a&gt;, car les bouts de code expliqués ne sont pas suffisants pour tout comprendre.&lt;/p&gt;
 
 &lt;p&gt;Pour améliorer ce script, on pourrait par exemple :&lt;/p&gt;
 

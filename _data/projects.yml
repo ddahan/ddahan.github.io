@@ -1,3 +1,11 @@
+- slug: magnetiz
+  title: Magnetiz
+  subtitle: A digital loyalty program for small businesses
+  has_gallery: false
+  has_changelog: false
+  has_demo: false
+  has_github: false
+
 - slug: pixelmaker
   title: pixelmaker.io
   subtitle: Icon-Font-To-PNG-Online-Converter
