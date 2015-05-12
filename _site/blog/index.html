@@ -42,90 +42,268 @@
         
             <section class="post">
                 <header class="post-header">
-                    <h4 class="post-title"><a href="/post/tags-and-categories-on-github-pages/">How To Use Tags And Categories On GitHub Pages Without Plugins</a><small> &ndash; <time datetime="2014-08-03T00:00:00+02:00">Aug. 03, 2014</time></small></h4>
+                    <h4 class="post-title"><a href="/post/web-scrapping/">Web scraping de Yelp avec Python et BeautifulSoup</a><small> &ndash; <time datetime="2015-05-12T14:05:02+02:00">May. 12, 2015</time></small></h4>
                 </header>
                 <div class="post-description">
-                    <p><p><a href="http://pages.github.com/">GitHub Pages</a> service is just awesome!</p>
+                    <p><p>Aujourd’hui, nous allons expliquer et réaliser ensemble un script de scraping (<em>explications ci-dessous</em>) en utilisant le site de Yelp comme exemple.
+Le code complet de ce tutoriel est disponible sur <a href="https://github.com/ddahan?tab=repositories">GitHub</a>.</p>
 
-<p>And with the jekyll integration it even get’s more awesome! :D</p>
+<h2>Qu’est-ce que le web scraping ?</h2>
 
-<p>But there are some limitations of this big automated system:</p>
-
-<ul>
-<li>no own plugins</li>
-<li><a href="https://pages.github.com/versions/">limited available plugins</a></li>
-</ul>
-
-<p>As you may know:</p>
-
-<ul>
-<li>no tag / category plugins are (currently) available.</li>
-</ul>
-
-<p>Sad.. But that was something I really wanted to have!</p>
-
-<p>So I built my own Data-Template-NoPlugin-System and it works.</p>
+<p>Il s’agit d’une technique d’extraction du contenu d’un site web via un programme. Une fois les données extraites (dans un fichier Excel, XML, ou une base de données par exemple), on peut s’en servir comme on le souhaite.</p>
 </p>
                 </div>
-                <a href="/post/tags-and-categories-on-github-pages/" class="pull-right">Read more</a>
+                <a href="/post/web-scrapping/" class="pull-right">Read more</a>
                 <div class="clearfix"></div>
             </section>
         
             <section class="post">
                 <header class="post-header">
-                    <h4 class="post-title"><a href="/post/fa2png/">fa2png.io</a><small> &ndash; <time datetime="2014-05-27T00:00:00+02:00">May. 27, 2014</time></small></h4>
+                    <h4 class="post-title"><a href="/post/power-of-programming/">Power Of Programming</a><small> &ndash; <time datetime="2015-05-12T02:10:42+02:00">May. 12, 2015</time></small></h4>
                 </header>
                 <div class="post-description">
-                    <p><p>After a 12 hour hackathon we (<a href="http://jannikweyrich.com/">jannik</a> and I) released <a href="http://fa2png.io/">fa2png.io</a>.</p>
+                    <p>Programming seems to be an underrated job, especially in France. In this post, from my own experience, I'll try to explain why.
 
-<p>It’s an Font-Awesome-To-PNG-Online-Converter.</p>
+<!--more-->
+
+&nbsp;
+<h3><b>A strange way of thinking</b></h3>
+My French engineering school was specialized in programming so I had to work on lots of team programming projects in languages like C, C++, Java, Caml, etc. We used to work at night and all weekends.
+
+Yet, many people around me, including teachers, said sentences like this during all my school time:
+
+- "Be careful, if you stay too long in a technical area, you will never get out of it!"
+
+- "Start with coding, it's OK, then you'll evolve towards a project manager job..."
+
+- "You should outsource all your coding tasks to Chinese or Indian people."
+
+These sentences reveal how some French people think: coding is just something than anyone can do, with no added value. According to these people, if you want a respectable career (the one your parents would be proud of), the only way to get it  is to get out of technical shit and get responsibilities by managing other people. On top of that, telling "I'm a programmer" to a pretty girl is a good way to make her run away (but this is another topic).
+
+In the meantime, in spite of all of this, I still liked technical stuff (why wouldn't I, since I had made the choice to become an Engineer?)
+
+So, being unable at this stage to distinguish what was true or wrong, and what I should do to ensure a good future, I decided that it would be a good compromise to have a general knowledge of IT and not stay stuck in area to specialized. I became an IT consultant in a respectable French Company. I told myself : "This way, you stay in the technical world you like, but you’re not too bogged down in a geeky job, with the possibility to move into a better position, because everyone tells you to do so".
+<h3><b>Project Manager VS Developer?</b></h3>
+The truth is, in 2 years, I made lots of different things, as I had expected, and I even had the role of a project manager: I managed a man who was older than me to develop some internal software.
+
+Here is what I’ve learned from this experience:
+
+- Managing an IT project (even if this project is software development) should not be compared to developing software, the roles are completely different!
+
+- It's neither easier nor harder: developing a simple script is easier than designing a full multi-replicated software architecture. Managing a  two-person team for a project is easier than being at the head of a strategical project involving lots of complicated political aspects.
+
+On the one hand, someone masters algorithms, programming languages, software architectures, and is constantly thinking of the best way to solve a problem.
+
+On the other hand, someone manages budgets, deadlines, human relationships, sends emails, creates reports, makes presentations.
+
+Tell me why people want to create a hierarchical relationship between them? It's a complete nonsense and can lead to ridiculous and frustrating situations in which project managers are unable to understand code, set improbable deadlines to developers, and say "well done" to something easy but don't congratulate awesome work.
+
+This kind of behaviour makes the actually good French developers flee to the United States, where founders know how to attract them, and how to keep them. The income of a French developer is ludicrously low compared to that of someone working in the Silicon Valley. This fact, among others, shows the inability of many French companies to see the value of a good developer. Managers use <a href="http://www.ted.com/talks/lang/en/dan_pink_on_motivation.html">the intrinsic motivation</a> rather than a stick, providing a nice environment, making developers work on projects they actually enjoy, leaving them time to work on their personal projects, etc.
+<h3><b>Why I decided to quit my consulting job</b></h3>
+In a consulting world, you learn lots of different (technical or not) things. But you never choose which things you're going to learn. Even if this gives you a useful overview of the IT world, it quickly becomes frustrating because you have no time to master something. At best, you can be "pretty good at something", until your client has a whole new problem.
+
+But I think the more experience you get, the more you know what you enjoy doing, and therefore, the less you're satisfied with working on random topics. That's why I still think of consulting as a very good way to start a technical career.
+
+Besides this, the only purpose of being a consultant is to make your client happy. Most of the time, your client doesn't care about good-looking source code, he often doesn't care whether what he's doing is good for the company or not, he cares about making his own superior happy to make his income increase at the end of the year.
+
+Sometimes, as a "simple" consultant, and having to satisfy the client, you're forced to make stupid things like using script shell to create a program that requires object-oriented programming.
+
+That's why I decided to leave the consulting world to focus on programming, probably on my own startup.
+<h3><b>The power of programming</b></h3>
+I see Programming as a way to create actual value with nothing else than a computer, a brain, and time. I feel very privileged to be able do that. No need for raw materials or financial funding. For someone like me who has always been interested in entrepreneurship, that's just awesome.
+
+My actual motivation about mastering a programming language is the following: I tell myself: "Whatever software ideas I may have, I can realize them". I know it's kind of naive because being able to develop software doesn't mean being able to create a startup.
+
+But there are many different opportunities with being a good developer:
+
+- Having the ability to start the effective development of the idea you get the day before can be very worthwhile if you are interested in software-based start-up development. It prevents you from wasting money on paying consultants the high price, and then postponing the day investors are required.
+
+- If you dream about working abroad, having broadly wanted technical skills is a great way (among others) to be hired in a foreign company.
+
+- Or sometimes, you just want to create something for fun, not for money...because it's a personal challenge, to help someone you like, or because you just need to create stuff to feel happy.
+
+For all those reasons, I decided to focus on learning Python, Django, AngularJS, Ionic, and other stuff that was all fun, useful for my startup project, and valuable on the market at the same time. I learn a lot everyday, and I'm so glad to have the opportunity to choose in which area I can make progress on.
+<h3><b>High hopes</b></h3>
+I'll conclude on a positive note because things seem to progressively change for Some "Y Generation" founders. They understand the importance of technical profiles in an innovation-based startup, and so, <a href="http://www.guilhembertholet.com/blog/2012/03/12/comment-devenir-une-startup-developpeur-friendly/">do everything they can to attract them in their startup</a>. Plus, the ratio between supply and demand is very favorable to IT professionals, so recruiters need to try new methods to attract/keep them, in addition to raising incomes. Some French IT consulting firms like Octo seem to understand how to make technical guys happy.
+
+What about you? What do you think of the French programming ecosystem?
+
+
 </p>
                 </div>
-                <a href="/post/fa2png/" class="pull-right">Read more</a>
+                <a href="/post/power-of-programming/" class="pull-right">Read more</a>
                 <div class="clearfix"></div>
             </section>
         
             <section class="post">
                 <header class="post-header">
-                    <h4 class="post-title"><a href="/post/opensourced-minddust-com/">OpenSourced minddust.com</a><small> &ndash; <time datetime="2014-04-11T00:00:00+02:00">Apr. 11, 2014</time></small></h4>
+                    <h4 class="post-title"><a href="/post/choisir-hebergement-web/">Choisir Hebergement Web</a><small> &ndash; <time datetime="2015-05-08T00:48:55+02:00">May. 08, 2015</time></small></h4>
                 </header>
                 <div class="post-description">
-                    <p><p>A friend ask me if he could see my <a href="http://pages.github.com/">GitHub Pages</a> setup. </p>
+                    <p>Bonjour bonjour !
 
-<blockquote>
-<p>Well sure just look at my repositories</p>
-</blockquote>
+Pour ce premier article, j'ai décidé de m'attaquer à un sujet en pleine évolution qu'est l'hébergement web. Au délà des différents hébergeurs, il y a de nombreux types d'hébergements différents et il est parfois un peu compliqué de s'y retrouver.
 
-<p>But than i noticed that it&#39;s private for no reason - so here we go!</p>
+<strong>Quels sont les différents types d'hébergement pour site web ?</strong>
 
-<p><a href="https://github.com/minddust/minddust.github.io">https://github.com/minddust/minddust.github.io</a></p>
+l'IaaS : infrastructure as a service
+
+Accès à une machine virtuelle (qu'on appellera <em>VM</em> par la suite)
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+// Besoins particuliers ? Haute dispo ?
+
+&nbsp;
+
+<strong>Comment faire son choix ?</strong>
+
+// Est-ce un choix définitif ?
+
+Non pas du tout. Commencer par du PaaS permet de gagner en rapidité de déploiement.
+
+Cependant, si votre projet commence à avoir du succès, vous allez devoir ajouter des "dynos" pour assurer la charge. Au bout d'un moment, la facture va vite être salée.
+
+Concrètement, il est judicieux de migrer vers de l'IaaS/VPS lorsque le surcout engendré par le PaaS est jugé inférieur au temps nécessaire pour migrer vers de l'IaaS. J'espère que je suis clair :)
+
+puis passer à de l'IaaS ou du VPS par la suite, quand les besoins en ressources seront trop ha
+
+// Dans quel cas ce serait une mauvaise idée ?
+
+-&gt; Besoin de beaucoup de ressources dès le début (CPU/RAM). Les raisons peuvent être multiples :on est sûrs d'avoir beaucoup de traffic très rapidement, le service qu'on propose va faire par exemple de la génération de document ou utiliser des algorithmes qui consomment beaucoup de CPU/RAM.
+
+-&gt; Si on a des besoins particuliers. Ex : haute dispo / Fault Tolerance / Backups
+
+
 </p>
                 </div>
-                <a href="/post/opensourced-minddust-com/" class="pull-right">Read more</a>
+                <a href="/post/choisir-hebergement-web/" class="pull-right">Read more</a>
                 <div class="clearfix"></div>
             </section>
         
             <section class="post">
                 <header class="post-header">
-                    <h4 class="post-title"><a href="/post/switch-to-github-pages/">Switch To GitHub Pages</a><small> &ndash; <time datetime="2014-01-15T00:00:00+01:00">Jan. 15, 2014</time></small></h4>
+                    <h4 class="post-title"><a href="/post/mapreduce-dataset-yelp/">Mapreduce Dataset Yelp</a><small> &ndash; <time datetime="2015-05-08T00:47:45+02:00">May. 08, 2015</time></small></h4>
                 </header>
                 <div class="post-description">
-                    <p><p>Today I switched from my former vps + django setup to github + jekyll aka <a href="http://pages.github.com/">GitHub Pages</a>.</p>
+                    <p>Intro )
+
+Le but ici va d'être d'analyser un jeu de données <a href="http://www.yelp.com/dataset_challenge">fourni par Yelp</a> afin d'en tirer des résultats utilisables, comme par exemple le nombre de mots positifs ("awesome", "good", ...) moyen par review.
+
+Pour que ce soit techniquement drôle, on va faire comme si le dataset à analyser est tellement énorme qu'on a absolument besoin de paralléliser les calculs sur 3 serveurs. Et comme je n'ai pas la chance d'avoir un datacenter à domicile, on utilisera 3 machines virtuelles créées pour l'occasion sur mon HP microserver. Evidemment, vous pouvez déjà en déduire que d'un point de vue performances, c'est tout sauf pertinent, mais peu importe : le but ici est de tester l'algorithme MapReduce en utilisant Hadoop, pas de battre des records de performance. Cela dit, si vous voulez reproduire ce tutoriel sur des serveurs physiques, faites vous plaisir !
+
+Pour développer l'algorithme de MapReduce, on utilisera le langage Python, tout simplement parce que l'API streaming de Hadoop le permet, alors on ne va pas se priver !
+
+Le code est disponible sur GitHub pour les curieux qui veulent s'amuser.
+
+Le but de cet article n'étant pas d'expliquer en long et en large ce qu'est l'algorithme MapReduce ou le framework Hadoop, si vous n'êtes pas à l'aise avec le sujet, je vous invite à lire ces excellents articles (en anglais) :
+
+<a href="http://www.glennklockwood.com/di/hadoop-overview.php">Conceptual Overview of Map/Reduce and Hadoop</a>
+
+<a href="http://www.glennklockwood.com/di/hadoop-streaming.php">Writing Hadoop Applications in Python with Hadoop Streaming</a>
+
+Avant de commencer, un petit schéma récapitulatif de ce qu'on va essayer de faire pour que vous y voyiez plus clair :
+
+&nbsp;
+
+1) Installation des machines virtuelles
+
+2) Installation du Frameworks Hadoop sur les noeuds
+
+3) Développement du mapper et du reducer en Python
+
+
 </p>
                 </div>
-                <a href="/post/switch-to-github-pages/" class="pull-right">Read more</a>
+                <a href="/post/mapreduce-dataset-yelp/" class="pull-right">Read more</a>
                 <div class="clearfix"></div>
             </section>
         
             <section class="post">
                 <header class="post-header">
-                    <h4 class="post-title"><a href="/post/django-spaceless-with-preserved-pre-formatting/">Django Spaceless With Preserved Pre Formatting</a><small> &ndash; <time datetime="2013-12-31T00:00:00+01:00">Dec. 31, 2013</time></small></h4>
+                    <h4 class="post-title"><a href="/post/10-facons-serveur/">10 Facons Serveur</a><small> &ndash; <time datetime="2015-05-08T00:44:49+02:00">May. 08, 2015</time></small></h4>
                 </header>
                 <div class="post-description">
-                    <p><p>I&#39;m using Django&#39;s <a href="https://docs.djangoproject.com/en/dev/ref/templates/builtins/#spaceless">spaceless</a> template-tag a lot, but after adding some code inside a <code>pre</code> tag I recognised that everything left is a squeezed string. I never came up with that problem before. The builtin spaceless tag is doing just fine. So after a little bit of searching I quickly found some resources about that topic:</p>
+                    <p>Il y a quelques années, j'ai fait l'acquisition d'un <a href="http://www.amazon.fr/HP-658553-421-MicroServer-processeur-Contr%C3%B4leur/dp/B005LRCASM">HP MicroServer</a> pour environ 250€. Quésako ? C'est un serveur comme un autre en fait, mais sa taille et son prix font de lui un compagnon parfait pour une petite start-up ou un particulier.
+
+Avec tous les différents usages qu'on peut en faire, vous allez vous rendre compte que ce n'est pas qu'un achat impulsif de geek qui souhaite à tout prix transformer son salon en datacenter ! Néanmoins, si vous souhaitez draguer une fille dans un bar, c'est pas forcément le sujet le plus conseillé à aborder, je vous l'accorde.
+
+Allez c'est parti, voyons voir tout ce qu'on peut faire !
+
+1) Serveur de fichier (NAS)
+
+Pour que ce système soit viable, il faudra tout de même vous assurer d'avoir un réseau local de bonne qualité. Prenez en compte par exemple qu'en étant connecté à votre NAS via votre routeur wi-fi, ça sera difficile de lire des fichiers HD en temps réel. Au contraire, avec une connexion Ethernet directe à votre box, ça ne posera pas de problème à priori.
+
+2) Serveur FTP
+
+Vous avez besoin de partager 5Go de photos et de vidéos de vacances ? L'upload risque d'être long non ? Une solution simple consiste à créer un serveur FTP. Il suffit ensuite de créer un ou plusieurs accès pour les personnes supposées y accéder.
+
+Note : ce protocole est un peu obsolète d'un point de vue sécurité, donc lorsqu'il n'est pas utilisé, pensez à le désactiver, ça évitera que des gens s'introduisent sur votre réseau.
+
+3) Client BitTorrent
+
+Vous êtes accroc au téléchargement ? Vous êtes du genre à laisser votre ordi tourner la nuit pour télécharger ? Pourquoi ne pas utiliser votre serveur pour jouer ce rôle ? Lui au moins, il tourne H24 par défaut, et si vous avez un NAS, les fichiers seront déjà dessus. En plus, certains programmes/scripts permettent même de télécharger automatiquement certains fichiers nouvellement disponibles, via des flux RSS. En gros, vous vous reveillez, et les fichiers que vous vouliez vous attendent tranquilement, la belle vie.
+
+4) Serveur de sauvegarde (Rsync)
+
+Imaginez votre maman qui vient tout juste d'apprendre à transférer ses photos dans le dossier "photo" de son ordinateur. Vous espérez quand-même pas qu'elle pense à les sauvegarder dans le claoud ?
+
+L'astuce, vous lui installez un client <a href="http://fr.wikipedia.org/wiki/Rsync">Rsync</a> sur son ordinateur, et vous, vous vous occupez de la partie serveur. Concrètement, à des horaires définis, le contenu de son dossier "photo" sera synchronisé sur votre serveur. Et comme Rsync est intelligent, il va synchroniser juste le différentiel entre les deux dossiers, pour ne pas dévorer toute la bande passante. Evidemment, ça peut fonctionner en local, avec votre maman chez vous, mais aussi avec votre mamie qui habite à 50km, en passant cette fois-ci par Internet. Dans ce cas, on pensera à utiliser un VPN pour assurer un minimum de confidentialité sur les données transférées. Notez que Rsync est un logiciel libre, gratuit, multi OS, fiable et intelligent.
+
+PS : Pensez à lui dire quand même que vous pouvez voir toutes ses photos, on sait jamais...
+
+5) Hégerbeur de site web
+
+Vous aussi les hébergeurs soi-disant gratuits vous n'y croyez pas ?
+
+Attention, n'esperez pas atteindre une dispo de 99.99% dans votre propre maison. Une prise débranchée en passant l'aspirateur, ça arrive ! Une coupure de courant EDF, une erreur de manip aussi.
+
+6) Serveur d'impression (CUPS)
+
+Vous avez une bonne vieille imprimante réseau et vous voudriez qu'elle puisse être utilisée par toute la famille, un petit serveur d'impression CUPS est bien pratique. Ce dernier va permettre à n'importe qui connecté au réseau local d'installer l'imprimante facilement. Certes, si vous avez une imprimante wi-fi, pas besoin !
+
+7) Serveur Git
+
+Vous développez en équipe et vous voulez votre propre serveur Git ? Pourquoi pas ! Là encore, le choix de ne pas prendre un serveur dans le cloud, à l'heure où des services commes Github cartonnent, doit être mûrement réfléchi.
+
+8) Hyperviseur (ESX ou Xen)
+
+Là ça devient intéressant. Imaginez votre serveur comme un terrain de jeu géant, où vous pouvez ajouter des machines virtuelles, faire tous les tests que vous voulez, puis en supprimer. En fait, transformer votre serveur en hyperviseur va vous permettre de faire tous les usages qu'on a vus ci-dessus, sans jamais avoir le risque de casser quelque chose.
+
+Si vous voulez mettre un ESX, il faudra 4Go de RAM minimum.
+
+9) VPN
+
+Vous avez décidé de devenir agents secrets avec votre girl friend (oui je pars du principe que le lecteur est masculin), et vous décidez que tous vos échanges ne devront jamais être interceptés par les méchants américains de la NSA ? Pourtant, vous habitez à 300 Km l'un de l'autre et votre seul moyen de communication est Internet ? Ou vous êtes tout simplement parano ? Pas de soucis, vous allez utiliser un VPN, et donc créer un tunnel qui simulera une connexion locale avec votre partenaire, alors que le flux est encapsulé dans un protocole sécurisé. Si des données sont interceptées, elles seront indéchiffrables. Alors oui, ça pourrait être géré directement côté client, mais si on peut alléger sa machine en déportant ça sur le serveur, pourquoi se gêner ?
+
+Le logiciel libre le plus connu est <a href="https://openvpn.net/">OpenVPN</a>
+
+<strong>Et moi alors dans tout ça comment je m'en sers ?</strong>
+
+Lorsque ma friteuse et mon lave-linge sont allumés en même temps, les plombs sautent (si si j'habite à Paris j'vous jure). Du coup, pour tout ce qui est "critique", j'évite de me faire confiance en tant qu'hébergeur web.
+
+Je l'utilise principalement comme NAS pour y mettre tous mes fichiers volumineux. Idéalement j'aurais dû y mettre du <a href="http://fr.wikipedia.org/wiki/RAID_%28informatique%29#RAID_1_:_Disques_en_miroir">RAID 1</a> pour m'éviter une bête perte de données, mais j'ai été feignant et placé mes fichiers plus importants (Photos, etc.) sur Dropbox (ce qui n'est pas la meilleure des solutions puisque<a href="http://college.wfu.edu/itg/scott-claybrook/2014/10/21/dropbox-is-not-a-backup-service/"> Dropbox n'est pas un outil de sauvegarde</a>).
+
+Pour ne pas réinventer la roue, j'utilise une distribution qui s'appelle <a href="http://www.openmediavault.org/">OpenMediaVault</a> et permet de gérer ça très facilement.
+
+Cette distrib n'est qu'une machine virtuelle puisqu'en fait sur mon serveur j'ai installé un hyperviseur ESX (VmWare).
+
+Pour ceux qui ne connaissent pas, vulgairement, ça me permet d'installer différents systèmes d'exploitations, sur mon unique serveur physiques. Chaque "machine virtuelle" a son propre système d'exploitation, sa propre quantité de RAM, de disque, et de CPU alloués. Tout est donc cloisonné. Je profite donc régulièrement de mon serveur pour monter des VMs et faire des tests particuliers. Dernièrement, j'ai créé 3 machines virtuelles pour tester le calcul distribué sous Hadoop par exemple.
+
+<strong>Et vous, vous voyez un autre moyen intéressant d'utiliser un votre home server ?</strong>
+
+
 </p>
                 </div>
-                <a href="/post/django-spaceless-with-preserved-pre-formatting/" class="pull-right">Read more</a>
+                <a href="/post/10-facons-serveur/" class="pull-right">Read more</a>
                 <div class="clearfix"></div>
             </section>
         
@@ -143,6 +321,10 @@
                 
                     
                         <li><a href="/blog/2/">2</a></li>
+                    
+                
+                    
+                        <li><a href="/blog/3/">3</a></li>
                     
                 
                 

@@ -1,0 +1,25 @@
+Intro )
+
+Le but ici va d'être d'analyser un jeu de données <a href="http://www.yelp.com/dataset_challenge">fourni par Yelp</a> afin d'en tirer des résultats utilisables, comme par exemple le nombre de mots positifs ("awesome", "good", ...) moyen par review.
+
+Pour que ce soit techniquement drôle, on va faire comme si le dataset à analyser est tellement énorme qu'on a absolument besoin de paralléliser les calculs sur 3 serveurs. Et comme je n'ai pas la chance d'avoir un datacenter à domicile, on utilisera 3 machines virtuelles créées pour l'occasion sur mon HP microserver. Evidemment, vous pouvez déjà en déduire que d'un point de vue performances, c'est tout sauf pertinent, mais peu importe : le but ici est de tester l'algorithme MapReduce en utilisant Hadoop, pas de battre des records de performance. Cela dit, si vous voulez reproduire ce tutoriel sur des serveurs physiques, faites vous plaisir !
+
+Pour développer l'algorithme de MapReduce, on utilisera le langage Python, tout simplement parce que l'API streaming de Hadoop le permet, alors on ne va pas se priver !
+
+Le code est disponible sur GitHub pour les curieux qui veulent s'amuser.
+
+Le but de cet article n'étant pas d'expliquer en long et en large ce qu'est l'algorithme MapReduce ou le framework Hadoop, si vous n'êtes pas à l'aise avec le sujet, je vous invite à lire ces excellents articles (en anglais) :
+
+<a href="http://www.glennklockwood.com/di/hadoop-overview.php">Conceptual Overview of Map/Reduce and Hadoop</a>
+
+<a href="http://www.glennklockwood.com/di/hadoop-streaming.php">Writing Hadoop Applications in Python with Hadoop Streaming</a>
+
+Avant de commencer, un petit schéma récapitulatif de ce qu'on va essayer de faire pour que vous y voyiez plus clair :
+
+&nbsp;
+
+1) Installation des machines virtuelles
+
+2) Installation du Frameworks Hadoop sur les noeuds
+
+3) Développement du mapper et du reducer en Python

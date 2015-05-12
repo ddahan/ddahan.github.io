@@ -42,17 +42,131 @@
         
             <section class="post">
                 <header class="post-header">
-                    <h4 class="post-title"><a href="/post/finally-some-content/">Finally Some Content</a><small> &ndash; <time datetime="2013-11-11T00:00:00+01:00">Nov. 11, 2013</time></small></h4>
+                    <h4 class="post-title"><a href="/post/home-server-architecture/">Home Server Architecture</a><small> &ndash; <time datetime="2015-05-08T00:42:14+02:00">May. 08, 2015</time></small></h4>
                 </header>
                 <div class="post-description">
-                    <p><p>One of my biggest problems with my own websites (since 2001) was always pushing content.</p>
+                    <p>Today, I'd like to share my own home server architecture and then explain the choices I made. Before that, maybe we should clarify the "Architecture" term. As you know (or maybe not), an IT system can be seen from different points of view. Each of them bring different pieces of information. Depending on what you want to know/do, all these views can be interesting to you. Let's describe the 3 types of architecture :
+<h4>Technical Architecture</h4>
+Technical architecture refers to the hardware used in your system. When you're thinking of technical architecture, you should answer these questions: what is the hardware used to make my IT system run? How these blocs are plugged together? This is indeed a simplification, but technical architecture can actually be drawn just by seeing the reality.
 
-<p>Or.. was it to finish the never ending design part which don&#39;t let me do it?</p>
+For example, "a HP Micro Server" can be linked to a "Cisco Switch" using an "Ethernet Cable". All these stuff are physical, you can touch them, they compose the infrastructure of your IT system.
+<h4>Logical/Software Architecture</h4>
+I could be hit for mixing logical and software architecture, but let's try to simplify it, saying that it's about the soft part running on the infrastructure we described above.
 
-<p>However - this is now an attempt to do better! ;-)</p>
+If your computer is the hardware part (technical architecture), what is running on your computer ? An operational system (Windows, OSX, Linux...), and what is running above your Operational system ? Software like your favorite web Browser, Word, Photoshop, World Of Warcraft, etc. Again, it's simplified, but we don't mind here. Just see L/S Architecture as logical blocs that can be next to each other, or embedded like Russian dolls (the OS contains the software)
+<h4>Functional Architecture</h4>
+Function architecture identifies what <strong>functions</strong> are available and how they interact together. When you're thinking of functional architecture, you must have a user view here and answer this question: what can the user do in the system? There is here absolutely no technical reference.
+
+For example, "send a file", "convert file format", "read a file" are 3 functions that the user of our IT system could use.
+
+Now this "introduction" is finished, let draw and describe (pictures and words !) the architecture<strong>s</strong> of my home server.
+<h3>Home Server Architectures</h3>
+[caption id="attachment_29" align="aligncenter" width="300"]<a href="http://david-dahan.com/blog/wp-content/uploads/logical_architecture.png"><img class="size-medium wp-image-29" src="http://david-dahan.com/blog/wp-content/uploads/logical_architecture-300x149.png" alt="logical architecture" width="300" height="149" /></a> The Logical View[/caption]
+
+[caption id="attachment_31" align="aligncenter" width="222"]<a href="http://david-dahan.com/blog/wp-content/uploads/physical_architecture.png"><img class="size-medium wp-image-31" src="http://david-dahan.com/blog/wp-content/uploads/physical_architecture-222x300.png" alt="Physical Architecture" width="222" height="300" /></a> The Technical View[/caption]
+
+
 </p>
                 </div>
-                <a href="/post/finally-some-content/" class="pull-right">Read more</a>
+                <a href="/post/home-server-architecture/" class="pull-right">Read more</a>
+                <div class="clearfix"></div>
+            </section>
+        
+            <section class="post">
+                <header class="post-header">
+                    <h4 class="post-title"><a href="/post/do-it-yourself/">Do It Yourself</a><small> &ndash; <time datetime="2015-05-08T00:41:05+02:00">May. 08, 2015</time></small></h4>
+                </header>
+                <div class="post-description">
+                    <p>Why it's often better to do it yourself.
+
+// Almost everything can be learnt.
+
+// What are your motivations? Do you care about learning? doing? Or you just want getting things done, no matter who achieve the tasks?
+
+// Rework
+
+// Limitations
+
+You have to agree with the fact that some tasks require a special talent. Maybe you have it, maybe not.
+For example, I'm thinking of graphics skills. It's pretty impossible to draw a logo by yourself if you never did this before.
+
+
+</p>
+                </div>
+                <a href="/post/do-it-yourself/" class="pull-right">Read more</a>
+                <div class="clearfix"></div>
+            </section>
+        
+            <section class="post">
+                <header class="post-header">
+                    <h4 class="post-title"><a href="/post/focus-python/">Focus Python</a><small> &ndash; <time datetime="2015-05-08T00:37:12+02:00">May. 08, 2015</time></small></h4>
+                </header>
+                <div class="post-description">
+                    <p>Why I chose Python as the language to learn, and why I chose to make a choice about which language to use?
+
+Beaucoup de langages différents, de manière plus ou mons approfondie (C, C++, Java, Caml, Pascal, C#)
+
+Frustration d'en maitriser aucun
+
+1) The language itself: It's really to learn, easy to write and it's easy to read other's code. The syntax is damn clean! There is no braces since code indentation has meaning.
+Besides, it supports multiple programming paradigms: object-oriented, imperative and functional.
+
+//screenshot de comparaison code Python et autre
+
+2) I can do almost everything that I want to with this language : scripting on Unix environments (Python is installed by default), Web-site development (using for instance the awesome Django Framework), thick multi-OS programs with GUI (with TkInter for example), Games (with Pygame), etc.
+Even if I know that playing with different languages (I dit it during school with C, C++, Java, Caml, etc..) allows the developer to understand better difficult concepts, in a real world where time is not infinite, I'm convinced that it's more productive to have strong knowledge in Algorithm Analysis then focusing on mastering one versatile language, rather than trying to be the best at all.
+
+// Limites : Javascript pour la partie front-end, nécessaire dans la trousse à outil du développeur web moderne.
+
+
+</p>
+                </div>
+                <a href="/post/focus-python/" class="pull-right">Read more</a>
+                <div class="clearfix"></div>
+            </section>
+        
+            <section class="post">
+                <header class="post-header">
+                    <h4 class="post-title"><a href="/post/tags-and-categories-on-github-pages/">How To Use Tags And Categories On GitHub Pages Without Plugins</a><small> &ndash; <time datetime="2014-08-03T00:00:00+02:00">Aug. 03, 2014</time></small></h4>
+                </header>
+                <div class="post-description">
+                    <p><p><a href="http://pages.github.com/">GitHub Pages</a> service is just awesome!</p>
+
+<p>And with the jekyll integration it even get’s more awesome! :D</p>
+
+<p>But there are some limitations of this big automated system:</p>
+
+<ul>
+<li>no own plugins</li>
+<li><a href="https://pages.github.com/versions/">limited available plugins</a></li>
+</ul>
+
+<p>As you may know:</p>
+
+<ul>
+<li>no tag / category plugins are (currently) available.</li>
+</ul>
+
+<p>Sad.. But that was something I really wanted to have!</p>
+
+<p>So I built my own Data-Template-NoPlugin-System and it works.</p>
+</p>
+                </div>
+                <a href="/post/tags-and-categories-on-github-pages/" class="pull-right">Read more</a>
+                <div class="clearfix"></div>
+            </section>
+        
+            <section class="post">
+                <header class="post-header">
+                    <h4 class="post-title"><a href="/post/fa2png/">fa2png.io</a><small> &ndash; <time datetime="2014-05-27T00:00:00+02:00">May. 27, 2014</time></small></h4>
+                </header>
+                <div class="post-description">
+                    <p><p>After a 12 hour hackathon we (<a href="http://jannikweyrich.com/">jannik</a> and I) released <a href="http://fa2png.io/">fa2png.io</a>.</p>
+
+<p>It’s an Font-Awesome-To-PNG-Online-Converter.</p>
+</p>
+                </div>
+                <a href="/post/fa2png/" class="pull-right">Read more</a>
                 <div class="clearfix"></div>
             </section>
         
@@ -74,8 +188,12 @@
                         <li class="active"><span>2</span></li>
                     
                 
+                    
+                        <li><a href="/blog/3/">3</a></li>
+                    
                 
-                    <li class="disabled"><a href="#">&raquo;</a></li>
+                
+                    <li><a href="/blog/3/">&raquo;</a></li>
                 
             </ul>
         </div>

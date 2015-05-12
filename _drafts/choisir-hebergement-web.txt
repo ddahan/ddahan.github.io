@@ -1,0 +1,41 @@
+Bonjour bonjour !
+
+Pour ce premier article, j'ai décidé de m'attaquer à un sujet en pleine évolution qu'est l'hébergement web. Au délà des différents hébergeurs, il y a de nombreux types d'hébergements différents et il est parfois un peu compliqué de s'y retrouver.
+
+<strong>Quels sont les différents types d'hébergement pour site web ?</strong>
+
+l'IaaS : infrastructure as a service
+
+Accès à une machine virtuelle (qu'on appellera <em>VM</em> par la suite)
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+// Besoins particuliers ? Haute dispo ?
+
+&nbsp;
+
+<strong>Comment faire son choix ?</strong>
+
+// Est-ce un choix définitif ?
+
+Non pas du tout. Commencer par du PaaS permet de gagner en rapidité de déploiement.
+
+Cependant, si votre projet commence à avoir du succès, vous allez devoir ajouter des "dynos" pour assurer la charge. Au bout d'un moment, la facture va vite être salée.
+
+Concrètement, il est judicieux de migrer vers de l'IaaS/VPS lorsque le surcout engendré par le PaaS est jugé inférieur au temps nécessaire pour migrer vers de l'IaaS. J'espère que je suis clair :)
+
+puis passer à de l'IaaS ou du VPS par la suite, quand les besoins en ressources seront trop ha
+
+// Dans quel cas ce serait une mauvaise idée ?
+
+-&gt; Besoin de beaucoup de ressources dès le début (CPU/RAM). Les raisons peuvent être multiples :on est sûrs d'avoir beaucoup de traffic très rapidement, le service qu'on propose va faire par exemple de la génération de document ou utiliser des algorithmes qui consomment beaucoup de CPU/RAM.
+
+-&gt; Si on a des besoins particuliers. Ex : haute dispo / Fault Tolerance / Backups

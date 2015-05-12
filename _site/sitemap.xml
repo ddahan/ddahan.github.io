@@ -3,6 +3,22 @@
     <url><loc>http://www.david-dahan.com</loc></url>
 
     
+        <url><loc>http://www.david-dahan.com/post/web-scrapping/</loc></url>
+    
+        <url><loc>http://www.david-dahan.com/post/power-of-programming/</loc></url>
+    
+        <url><loc>http://www.david-dahan.com/post/choisir-hebergement-web/</loc></url>
+    
+        <url><loc>http://www.david-dahan.com/post/mapreduce-dataset-yelp/</loc></url>
+    
+        <url><loc>http://www.david-dahan.com/post/10-facons-serveur/</loc></url>
+    
+        <url><loc>http://www.david-dahan.com/post/home-server-architecture/</loc></url>
+    
+        <url><loc>http://www.david-dahan.com/post/do-it-yourself/</loc></url>
+    
+        <url><loc>http://www.david-dahan.com/post/focus-python/</loc></url>
+    
         <url><loc>http://www.david-dahan.com/post/tags-and-categories-on-github-pages/</loc></url>
     
         <url><loc>http://www.david-dahan.com/post/fa2png/</loc></url>
@@ -44,22 +60,10 @@
     
         <url><loc>http://www.david-dahan.com/blog/tag/django/</loc></url>
     
-        <url><loc>http://www.david-dahan.com/blog/tag/django-template-tags/</loc></url>
-    
-        <url><loc>http://www.david-dahan.com/blog/tag/font-awesome/</loc></url>
-    
-        <url><loc>http://www.david-dahan.com/blog/tag/icons/</loc></url>
-    
-        <url><loc>http://www.david-dahan.com/blog/tag/image-processing/</loc></url>
-    
         <url><loc>http://www.david-dahan.com/blog/tag/python/</loc></url>
     
-        <url><loc>http://www.david-dahan.com/blog/tag/github/</loc></url>
+        <url><loc>http://www.david-dahan.com/blog/tag/scripting/</loc></url>
     
-        <url><loc>http://www.david-dahan.com/blog/tag/github-pages/</loc></url>
-    
-        <url><loc>http://www.david-dahan.com/blog/tag/jekyll/</loc></url>
-    
-        <url><loc>http://www.david-dahan.com/blog/tag/open-source/</loc></url>
+        <url><loc>http://www.david-dahan.com/blog/tag/tutorial/</loc></url>
     
 </urlset>
