@@ -7,5 +7,14 @@
 - slug: scripting
   name: Scripting
 
+- slug: home-server
+  name: Home Server
+
+- slug: virtualization
+  name: Virtualisation
+
+- slug: unix
+  name: Unix
+
 - slug: tutorial
   name: Tutoriel
