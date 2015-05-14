@@ -185,5 +185,5 @@ Avez vous d’autres idées d’amélioration ?
 
 Notez aussi que ce genre de script n'a aucune garantie de fonctionner à travers le temps, puisque la moindre modif du côté de Yelp casserait son fonctionnement. N'hésitez pas à me le signaler si c'était le cas.
 
-J'espère que ce 1er tutoriel vous aura été utile, à bientôt !
+J'espère que ce tutoriel vous aura été utile, à bientôt !
 
