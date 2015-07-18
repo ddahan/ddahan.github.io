@@ -7,7 +7,7 @@ tags: [production, methodology, security]
 
 Parmi les tâches d'un CTO qui ne sont pas du développement pur, la bonne gestion des différents environnements me parait être l'une des plus importantes. Retour sur les bases de la gestion des environnements
 
-##Qu'est-ce qu'un environnement ?
+####Qu'est-ce qu'un environnement ?
 
 De manière générale (laissons de côté le web pour le moment), un environnement est un ensemble de matériels et de logiciels utilisés par l'application en question.
 
