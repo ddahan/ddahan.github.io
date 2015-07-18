@@ -54,6 +54,6 @@ Il n'y a pas qu'une réponse à cette question, mais voici une manière logique 
 
 Rien qu'avec cette étape intermédiaire de la pré-production, on vient de limiter énormément les risques de mise en production ratée. Bien évidemment, ceci est condtionné par la qualité des tests associés, mais c'est un autre sujet :) 
 
-Voilà, vous avez eu un aperçu très théorique de la gestion des environnements au sein d'un projet. Dans un prochain article, nous verrons comment mettre tout ça en pratique sur [Heroku](http://fr.wikipedia.org/wiki/Plate-forme_en_tant_que_service).
+Voilà, vous avez eu un aperçu très théorique de la gestion des environnements au sein d'un projet. Dans un prochain article, nous verrons comment mettre tout ça en pratique sur [Heroku](http://heroku.com).
 
 A bientôt !
