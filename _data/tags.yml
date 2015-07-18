@@ -1,20 +1,32 @@
 - slug: django
   name: Django
 
+- slug: home-server
+  name: Home Server
+
+- slug: methodology
+  name: Méthodologie
+
+- slug: production
+  name: Production
+
 - slug: python
   name: Python
 
 - slug: scripting
   name: Scripting
 
-- slug: home-server
-  name: Home Server
+- slug: security
+  name: Sécurité
 
-- slug: virtualization
-  name: Virtualisation
+- slug: tutorial
+  name: Tutoriel
 
 - slug: unix
   name: Unix
 
-- slug: tutorial
-  name: Tutoriel
+- slug: virtualization
+  name: Virtualisation
+
+
+
