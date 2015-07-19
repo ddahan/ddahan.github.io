@@ -89,7 +89,7 @@ Quelques explications s'imposent :
 
 - la variable `AWS_S3_HOST`  est nécessaire quand la location du bucket n'est pas celle US par défaut. Exemple de valeur pour le datacenter Amazon situé en Irlande : `s3-eu-west-1.amazonaws.com`. La liste des différents host est [ici](http://www.bucketexplorer.com/documentation/amazon-s3--amazon-s3-buckets-and-regions.html).
 - par défaut, les fichiers sont écrits à la racine du bucket s3. Evidemment, on voudrait éviter de mélanger des fichiers statiques avec des fichiers média uploadés par un utilisateur. Pour cela, `AWS_STATIC_DIR` sera utilisé comme sous-répertoire de notre bucket contenant les fichiers statiques.
-- `STATICFILES_STORAGE` : ici c'est assez subtile ! Si on n'avait pas voulu utilisé des sous-répertoires dans notre bucket, on aurait écrit directement : `'storages.backends.s3boto.S3BotoStorage'`. Mais en fait ici, on va surcharger cette classe nous-même pour lui indiquer dans quel sous-répertoire sauvegarder les fichiers.
+- `STATICFILES_STORAGE` : ici c'est assez subtile ! Si on n'avait pas voulu utiliser des sous-répertoires dans notre bucket, on aurait écrit directement : `'storages.backends.s3boto.S3BotoStorage'`. Mais en fait ici, on va surcharger cette classe nous-même pour lui indiquer dans quel sous-répertoire sauvegarder les fichiers.
 
 
 Pour cela, dans votre projet (j'ai bien dit projet, pas application ^), créez un fichier storage.py, avec ce contenu :
