@@ -1,3 +1,6 @@
+- slug: aws
+  name: AWS
+
 - slug: django
   name: Django
 
