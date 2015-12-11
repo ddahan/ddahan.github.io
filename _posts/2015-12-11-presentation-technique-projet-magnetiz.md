@@ -9,7 +9,7 @@ Aujourd’hui, je publie un article un peu particulier puisque j'ai décidé de 
 
 Après avoir rappelé brièvement le fonctionnement de la solution, je présenterai l'architecture logique et physique de celle-ci, puis je rentrerai plus dans le détail du projet Django lui même, afin d'évoquer quelques problématiques rencontrées, et les solutions utilisées.
 
-Il ne s'agit pas d'une présentation exhaustive mais plutôt d'un tour d'horizon. Cet article pourra donc être complété au fil du temps.
+Il ne s'agit pas d'une présentation exhaustive mais plutôt d'un tour d'horizon technique. Cet article pourra donc être complété au fil du temps.
 
 ### Avant-propos : un point sur la sécurité
 
@@ -18,13 +18,13 @@ Je le fais malgré tout car d'une part, la solution est sur le point d'être arr
 
 ### Qu'est-ce que Magnetiz ?
 
-Magnetiz est une solution de fidélisation destinée aux commerces locaux. Chaque commerçant est équipé d'une ou plusieurs tablette(s) mobiles sur le comptoir, ainsi que de cartes de fidélité *vierges* à disposition pour les clients.
+Magnetiz est une solution de fidélisation destinée aux commerces locaux. Chaque commerçant est équipé d'une ou plusieurs tablette(s) mobiles sur son comptoir, ainsi que de cartes de fidélité *vierges* à disposition pour les clients.
 
-Lors de son premier passage en magasin, un client récupère une carte, et la scanne sur la tablette. Il est invité à entrer son adresse e-mail (et uniquement son e-mail), et cumule ses premiers points (par défaut : 5 points)
+Lors de son premier passage en magasin, un client récupère une carte, et la scanne sur la tablette. Il est invité à entrer son adresse e-mail (et uniquement son e-mail), et cumule ses premiers points (par défaut : 5 points).
 
 Après sa pré-inscription en magasin, le client reçoit un mail pour finaliser son compte (choisir un mot de passe et compléter ses infos personnelles). Il pourra s'il le souhaite télécharger et se connecter ensuite à l'application mobile.
 
-A chaque passage en magasin, le client scanne sa carte (ou son smartphone) directement sur la tablette tactile. A chaque fois, il cumule un nombre de points (5 par défaut). A tout moment, il peut réclamer un cadeau directement en le sélectionnant sur la tablette, à condition d'avoir suffisament de points.
+A chaque passage en magasin, le client scanne sa carte (ou son smartphone) directement sur la tablette tactile. A chaque fois, il cumule des points. A tout moment, il peut réclamer un cadeau directement en le sélectionnant sur la tablette, à condition d'avoir suffisament de points, bien sûr.
 
 Une même carte est utilisable dans tous les commerces Magnetiz.
 
@@ -62,7 +62,7 @@ L'utilisation des mêmes technos (HTML/CSS) pour les applications mobiles, pour 
 
 ##### Architecture web du projet
 
-L'architecture web est un choix important qui doit tenir compte de plusieurs critères : temps disponible, conaissances des développeurs, besoin de séparation fort ou pas, etc.
+L'architecture web est un choix important qui doit tenir compte de plusieurs critères : temps disponible, conaissances des développeurs, besoin de séparation front/back fort ou pas, etc.
 
 Ici, l'architecture retenue a été du simple MVC (MVT dans Django) + une API + 2 applis front externes. Les dashboards clients/commerçants et la landing page utilisent directement Django.
 
@@ -75,16 +75,16 @@ Une autre architecture aurait aussi pu être :
 + d'utiliser Django (ou un autre framework tel que Flask) uniquement pour les models et l'API. Ici, les web services auraient été appelées pour n'importe quelle requête effectuée.
 + développer une appli front-web par composant (en utilisant AngularJS par exemple) : 1 pour les dashboards, 1 pour l'appli smartphone, 1 pour l'appli tablette.
 
-L'avantage principal aurait été ici de découpler totalement la partie back (Django) des différents fronts. Un autre avantage aurait été de bénéficier "nativement" de features de mise à jour du DOM dans les dashboards, sans devoir utiliser jQuery par dessus Django.
+L'avantage principal aurait été ici de découpler totalement la partie back (Django) de la partie clients (front). Un autre avantage aurait été de bénéficier "nativement" de features de mise à jour du DOM dans les dashboards, sans devoir utiliser jQuery par dessus Django.
 L'inconvénient aurait été de ne pas profiter des mécanismes de Django dans la partie "View" et "Template".
 
 <hr>
 
 ##### Arborescence de fichiers Django
 
-L'arborescence simplifiée *(je ne conserve ici que les fichiers qui sont additionnels aux fichiers par défaut)* du projet Django est décrite ci-dessous. Elle est somme toute assez classique :
+L'arborescence simplifiée *(je ne conserve ici que les fichiers additionnels aux fichiers par défaut)* du projet Django est décrite ci-dessous. Elle est somme toute assez classique :
 
-+ monprojet
++ monprojet/
   + magnetiz/
       * management/  *-> contient différentes commandes d'admin Django*
   + restless_api/
@@ -122,9 +122,9 @@ Dans Magnetiz, nous disposons de quatre environnements distincts :
 + **Un environnement de pré-prod** : il est le plus proche possible de celui de prod (même données, mêmes packages, etc.). Il permet de tester le comportement de l'application et détecter toute anomalie avant une mise en production.
 + **Un environnement de production** : l'environnement utilisé par les clients de l'application. Il est bien sûr plus critique que les autres.
 
-Heroku (hébergeur PaaS) nous facilite grandement le travail pour séparer nos environnements. D'une part, il nous autorise à créer plusieurs applications par compte, mais surtout, il utilise un fichier `.env` contenant des variables supposées être différentes entre chaque environnement. De cette manière, on garde une unique base de code pour nos différents environnements, seul le fichier `.env` diffère.
+Heroku (hébergeur PaaS) nous facilite grandement le travail pour séparer nos environnements. D'une part, il nous autorise à créer plusieurs applications par compte, mais surtout, il utilise un fichier `.env` contenant des variables pouvant être définies différemment entre chaque environnement. De cette manière, on garde une unique base de code pour nos différents environnements, seul le fichier `.env` diffère.
 
-Voici un exemple d'une partie du fichier .env de développement (*valeurs modifiées*)
+Voici un exemple d'une partie du fichier .env de développement (*valeurs modifiées*) :
 
 ```
 DJANGO_DEBUG=True
@@ -142,21 +142,22 @@ SEND_MAIL = (os.environ['DJANGO_SEND_MAIL'] in ['True', 'true'])
 
 ### Description de l'API
 
-l'API (programming API et non pas public API), permet aux applications mobiles de requêter le serveur HTTP pour récupérer des résultats.
-Le framework utilisé est [Restless](https://restless.readthedocs.org/en/latest/) qui est minimaliste et permet d'arriver à créer une API simplement.
-Même si ce dernier permet une architecture REST, ce n'est pas le principe qui a été utilisé ici. En effet, les web services ne contenant aucune logique (ou un minimum), le but était simplement d'appeler les méthodes nécessaires dans le fichier `models.py`. L'utilisation des "verbes" HTTP n'avaient donc ici pas de grande valeur ajoutée.
+l'API permet aux applications mobiles de communiquer avec le serveur HTTP. Il s'agit d'une "programming API" et non pas d'une "public API", c'est à dire qu'elle n'est pas exposée publiquement.
+Le framework utilisé est [Restless](https://restless.readthedocs.org/en/latest/). C'est un framework minimaliste qui permet d'arriver à créer une API simplement et rapidement.
 
-L'authentification est BASIC HTTP. C'est peut-être la plus simple à mettre en place mais la moins sécurisée. Idéalement, les web services doivent être en HTTPS pour ajouter un minimum de sécurité et éviter les interception de type man-in-the-middle.
+Même si ce dernier permet une architecture REST, ce n'est pas le principe qui a été utilisé ici. En effet, les web services ne contenant aucune logique (ou un minimum), leur but est simplement d'appeler les méthodes nécessaires dans le fichier `models.py`. L'utilisation des "verbes" HTTP n'avaient donc ici pas de grande valeur ajoutée.
+
+L'authentification est [Basic](https://fr.wikipedia.org/wiki/Authentification_HTTP#M.C3.A9thode_.C2.AB_Basic_.C2.BB). C'est peut-être la plus simple à mettre en place mais aussi la moins sécurisée. Idéalement, les web services doivent être en HTTPS pour ajouter un minimum de sécurité et éviter les interceptions de type man-in-the-middle.
 
 ### Gestion du versionning
 
 Le versionning est une problématique complexe lorsque l'application contient plusieurs composants, notamment dans le cas de Magnetiz car nous devons nous assurer que les applications mobiles (peu importe leur version) soient toutes compatibles avec le back. Or, il est presque impossible de forcer un utilisateur à mettre à jour son application mobile.
 
-Fonctionnellement, il a été décidé de permettre que plusieurs versions d' applications soient compatibles avec le back-end, tout en nous autorisant à "déprécier" certaines versions trop vieilles, et ainsi demander à l'utilisateur de faire une MAJ au lancement d'une application deprecated.
+Fonctionnellement, il a été décidé de permettre que plusieurs versions d'applications soient compatibles avec le back-end, tout en nous autorisant à "déprécier" certaines versions trop vieilles, et ainsi demander à l'utilisateur de faire une MAJ au lancement d'une application deprecated.
 
 Techniquement, voici comment est agencé le versionning :
 
-+ Chaque application mobile a un fichier contenant entre autres son numéro de version :
++ Chaque application mobile a un fichier contenant entre autres son propre numéro de version :
 
 ```javascript
 var cfg = {
@@ -185,7 +186,7 @@ url(r'api_t/1-[0-9]-[0-9]/get_owner_infos/$', Deprecated_T.as_detail()),
 ### Utilisation des tests unitaires
 
 Les tests unitaires sont la 1ère étape pour garantir un code de qualité. Dans Magnetiz, les tests ont été développés pour les parties les plus critiques du code, et notamment l'API tablette.
-Petite particularité, un [LiveServer](https://docs.djangoproject.com/en/dev/topics/testing/tools/#django.test.LiveServerTestCase) a été utilisé dans le but de pouvoir utiliser la lib [Requests](http://docs.python-requests.org/en/latest/) pour effectuer les requêtes, très pratique dans le cas du test de l'API.
+Petite particularité, un [LiveServer](https://docs.djangoproject.com/en/dev/topics/testing/tools/#django.test.LiveServerTestCase) a été utilisé dans le but de pouvoir utiliser la lib [Requests](http://docs.python-requests.org/en/latest/) pour effectuer les requêtes, très pratique dans le cas des tests de l'API.
 
 Voici un exemple de test simple qui vérifie la récupération d'un client à partir d'un numéro de carte de fidélité :
 
@@ -241,8 +242,8 @@ Enfin pour l'affichage, il suffit d'associer une classe particulière Bootstrap 
 
 ### Jeux de données
 
-Afin de pouvoir remplir rapidement la base de données avec des données,
-Django utilise par défaut un système de [fixtures](https://docs.djangoproject.com/en/dev/howto/initial-data/). Celui-ci est très limité car les données sont statiques, et la maintenance du fichier json est compliquée à partir d'une certaine quantité de données.
+Afin de pouvoir remplir rapidement la base de données,
+Django propose l'utilisation d'un système de [fixtures](https://docs.djangoproject.com/en/dev/howto/initial-data/). Celui-ci est très limité car les données sont statiques, et la maintenance du fichier JSON est compliquée à partir d'une certaine quantité de données.
 
 Dans Magnetiz il a été nécessaire de créer 2 jeux de données différents :
 
@@ -296,7 +297,7 @@ Voici un exemple simple de commande permettant de réinitialiser les crédits d'
 class Command(BaseCommand):
     ''' Commande permettant de réinitialiser les crédits des owners à leur
     quantité initiale le 1er jour du mois.
-    A exécuter dans une tâche planifiée le 1er jour du mois '''
+    A exécuter dans une tâche planifiée le 1er jour du mois (ou tous les jours le cas échéant) '''
 
     help = ("Reinitialise les crédits des owners à leur quantité initiale le"
             "1er jour du mois")
@@ -315,9 +316,9 @@ class Command(BaseCommand):
 
 ### Problématiques de code diverses
 
-Voici diverses problématiques de code rencontrées pendant Magnetiz, dont la solution est intéressante.
+Voici diverses problématiques de code rencontrées pendant Magnetiz, dont la solution peut présenter un certain interêt.
 
-##### Comment parcourir dans un template, des données provenant d'objets hétérogènes, pour les afficher dans un tableau ?
+##### Comment parcourir dans un template, des données provenant d'objets hétérogènes, pour ensuite itérer dessus pour les afficher ?
 
 **Example** : dans une vue, je souhaite afficher les informations d'un client (nom, sexe, nombre de points, date du 1er scan, etc.) Or, une partie de ces infos ne se trouve pas dans l'objet correspondant au client, mais est au contraire éparpillée dans d'autres objets. Je ne peux donc pas passer les objets directement au template et espérer pouvoir afficher ces données correctement ensuite.
 De plus, c'est le rôle de la vue d'organiser les données avant leur passage au template.
@@ -350,7 +351,7 @@ client_infos = [ClientInfosTuple(
     for c in clients]
 ```
 
-De cette manière, je n'ai plus qu'à passer le tuple `client_infos` à mon template, et itérer dessus exactement de la même manière qu'un objet. Sauf que cette fois-ci, les données sont organisées exactement comme je le souhaite.
+De cette manière, je n'ai plus qu'à passer le tuple `client_infos` à mon template, et itérer dessus exactement de la même manière qu'un objet classique. Sauf que cette fois-ci, les données sont organisées exactement comme je le souhaite.
 
 <hr>
 
@@ -403,7 +404,7 @@ class Event(TimeStampedModel):
 
 Une des solutions est de surcharger la méthode `save()` de la classe, de détecter s'il s'agit d'une création ou d'une modification, et de changer le comportement par défaut.
 
-Dans le cas de Magnetiz, un utilisateur ne doit avoir qu'une seule ligne en base indiquant ses points. Ainsi, si la ligne n'existe pas, elle doit être créée. Si elle existe, elle doit être modifiée, plutôt que d'en recréer une par erreur. Afin de forcer ce comportement, la méthode `save()` de la classe `Points` est surchargée :
+Dans le cas de Magnetiz, un utilisateur ne doit avoir qu'une seule ligne en base indiquant ses points par commerce. Ainsi, si la ligne n'existe pas, elle doit être créée. Si elle existe, elle doit être modifiée, plutôt que d'en recréer une par erreur. Afin de forcer ce comportement, la méthode `save()` de la classe `Points` est surchargée :
 
 ```python
 # models.py
@@ -503,7 +504,7 @@ Note : pour améliorer la sécurité, on pourrait aussi utiliser un système de 
 
 ##### Comment générer un robot.txt différent en fonction des environnements, lorsqu'on n'a pas accès au serveur ?
 
-Réponse : le générer dynamiquement, directement via une vue Django. La liste des éléments à ne pas indexer est contenue dans une variable d'environnement, qui elle-même est récupérée dans la variable `DISALLOW_LIST` dans settings.py.
+Réponse : le générer dynamiquement, directement via une vue Django. La liste des éléments à ne pas indexer est contenue dans une variable d'environnement, qui elle-même est récupérée dans la variable `DISALLOW_LIST` dans `settings.py`.
 
 ```python
 # views.py
