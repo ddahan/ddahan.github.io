@@ -1,10 +1,6 @@
 timezone: Europe/Paris
 highlighter: pygments
-markdown: redcarpet
 permalink: /post/:title
-
-redcarpet:
-  extensions: [autolink]
 
 exclude: [README.md, TODO.md, LICENSE, node_modules, Makefile, Gulpfile.js, package.json]
 
