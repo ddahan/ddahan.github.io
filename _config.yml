@@ -1,5 +1,5 @@
 timezone: Europe/Paris
-highlighter: pygments
+highlighter: rouge
 permalink: /post/:title
 
 exclude: [README.md, TODO.md, LICENSE, node_modules, Makefile, Gulpfile.js, package.json]
