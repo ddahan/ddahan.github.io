@@ -1,6 +1,16 @@
 - slug: magnetiz
   title: Magnetiz
-  subtitle: A digital loyalty program for small businesses
+  subtitle: Un programme de fidélité digital pour les commerçants
+  has_techno: true
+  has_gallery: false
+  has_changelog: false
+  has_demo: false
+  has_github: false
+
+- slug: padam
+  title: Padam
+  subtitle: Un service innovant de transport à la demande en minibus partagés
+  has_techno: true
   has_gallery: false
   has_changelog: false
   has_demo: false
