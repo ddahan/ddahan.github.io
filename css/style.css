@@ -1,0 +1,80 @@
+body {
+    padding-top: 5rem;
+    background-color: #fff;
+    color: #3d3d3d; /* almost black */
+}
+
+.text-zone {
+    padding: 3rem 1.5rem;
+}
+
+.presentation {
+    text-align: center;
+}
+
+.consulting {
+}
+
+.projects {
+}
+
+/* Used to avoid text crossing navbar text */
+.navbar {
+    background-color: white;
+}
+
+/* Used to center navigation bar */
+.navbar-nav {
+    float: none;
+    margin: 0 auto;
+    display: table;
+    table-layout: fixed;
+}
+
+/* Handle my picture */
+/*.me-img {*/
+    /*height: 125px;*/
+    /*width: 125px;*/
+    /*display: inline-block;*/
+    /*padding: 10px;*/
+    /*border-radius: 50%;*/
+/*}*/
+
+/* Handle cards */
+.card {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+}
+
+.card-img-top {
+    height: 75px;
+    width: 100%;
+    display: block;
+    object-fit: contain;
+    padding: 10px;
+}
+
+.card-block {
+    background-color: #fcfcfc;
+}
+
+/* Handle presentation photos in modals */
+/*.img-presentation {*/
+    /*width: 100%;*/
+    /*display: block;*/
+    /*object-fit: contain;*/
+/*}*/
+
+/* Mini tech icons in svg */
+.tech-img {
+    display: inline;
+    margin: 5px 20px 5px 0;
+    width: 35px;
+    height: 35px;
+}
+
+/* Utility classes */
+.u-center {
+    text-align: center;
+}
