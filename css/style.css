@@ -31,6 +31,11 @@ body {
     table-layout: fixed;
 }
 
+/* Respect blank space bellow h1 titles */
+h1 {
+    margin-bottom: 30px;
+}
+
 /* Handle my picture */
 /*.me-img {*/
     /*height: 125px;*/
