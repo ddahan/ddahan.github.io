@@ -78,3 +78,7 @@ body {
 .u-center {
     text-align: center;
 }
+
+.u-left-list {
+    padding-left: 17px;
+}
