@@ -1,0 +1,23 @@
+id,value,color
+David,
+David.Back-End,
+David.Back-End.Python,3.5,#d6ae36
+David.Back-End.Django,3.5,#074b32
+David.Back-End.Django REST Framework,3,#8c2c29
+David.Back-End.Celery,3,#b5e05c
+David.Back-End.TDD,3,#000FFF
+David.Databases,
+David.Databases.PostgreSQL,3,#0098cd
+David.Databases.MongoDB,1,#69b140
+David.Databases.Redis,1,#db2913
+David.Devops,
+David.Devops.Heroku,3,#441c9b
+David.Devops.Sentry,3,#e34730
+David.Devops.Vagrant,3,#5ea5d0
+David.Devops.Git,3,#000000
+David.Devops.Travis CI,1.5,#313439
+David.Front-End,
+David.Front-End.HTML & CSS,2,#e74c17
+David.Front-End.Bootstrap,2,#563B7E
+David.Front-End.Ionic Framework,1.5,#4a8afb
+David.Front-End.Angular,1,#e72e30

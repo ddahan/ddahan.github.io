@@ -1,0 +1,50 @@
+svg {
+    display: block;
+    margin: auto;
+}
+
+.link {
+    fill: none;
+    stroke: #555;
+    stroke-opacity: 0.4;
+    stroke-width: 1px;
+}
+text {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    fill: black;
+    /*font-weight: bold;*/
+    font-size: 13px
+}
+
+.xAxis .tick text{
+    fill: black;
+}
+.grid .tick line{
+    stroke: grey;
+    stroke-dasharray: 5, 10;
+    opacity: 0.7;
+}
+.grid path{
+    stroke-width: 0;
+}
+
+.node circle {
+    fill: #999;
+}
+.node--internal circle {
+    fill: #555;
+}
+.node--internal text {
+    font-size: 16px;
+    text-shadow: 0 2px 0 #fff, 0 -2px 0 #fff, 2px 0 0 #fff, -2px 0 0 #fff;
+}
+.node--leaf text {
+    fill: white;
+}
+.ballG text {
+    fill: white;
+}
+/*.shadow {*/
+    /*-webkit-filter: drop-shadow( -1.5px -1.5px 1.5px #000 );*/
+    /*filter: drop-shadow( -1.5px -1.5px 1.5px #000 );*/
+/*}*/
