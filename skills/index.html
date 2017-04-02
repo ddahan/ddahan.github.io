@@ -75,17 +75,17 @@
             g = svg.append("g").attr("transform", "translate(30,10)");       // move right 20px.
 
     // x-scale and x-axis
-    var experienceName = ["", "Basic","Alright","Handy","Expert","Guru"];
+    var experienceName = ["", "Basic","Okay","Good","Great"];
     var formatSkillPoints = function (d) {
-        return experienceName[d % 6];
+        return experienceName[d % 5];
     }
     var xScale =  d3.scaleLinear()
-            .domain([0,5])
+            .domain([0,4])
             .range([0, 400]);
 
     var xAxis = d3.axisTop()
             .scale(xScale)
-            .ticks(5)
+            .ticks(4)
             .tickFormat(formatSkillPoints);
 
     // Setting up a way to handle the data
